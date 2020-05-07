@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<RasterProjectAsset>
+
+  <name>Projects/Terrain/SFTerrain.ktproject</name>
+
+  <type>Terrain</type>
+
+  <subtype>Project</subtype>
+
+  <inputs>
+    <input>Resources/Terrain/WorldTopography.ktasset</input>
+    <input>Resources/Terrain/SFTerrain.ktasset</input>
+  </inputs>
+
+  <meta/>
+
+  <versions>
+    <version>Projects/Terrain/SFTerrain.ktproject?version=1</version>
+  </versions>
+
+  <config idl_version="1">
+    <indexVersion>2</indexVersion>
+    <insets>
+      <inset>
+        <dataAsset>Resources/Terrain/WorldTopography.ktasset</dataAsset>
+        <maxlevel>14</maxlevel>
+        <overridemax>0</overridemax>
+      </inset>
+      <inset>
+        <dataAsset>Resources/Terrain/SFTerrain.ktasset</dataAsset>
+        <maxlevel>22</maxlevel>
+        <overridemax>0</overridemax>
+      </inset>
+    </insets>
+    <legend>
+      <defaultLocale>
+        <name useDefault="0">Terrain</name>
+        <isChecked useDefault="0">1</isChecked>
+        <desc useDefault="0"></desc>
+        <lookAt useDefault="0"></lookAt>
+        <icon useDefault="0">
+          <type>Internal</type>
+          <href>773</href>
+        </icon>
+      </defaultLocale>
+      <locales/>
+    </legend>
+    <fuid_channel>1001</fuid_channel>
+    <asset_uuid>382874f4-7a34-11ea-bdb1-d76aba3e7130</asset_uuid>
+    <is_timemachine_project>0</is_timemachine_project>
+    <is_overlay_terrain_project>0</is_overlay_terrain_project>
+    <overlay_terrain_resources_min_level>12</overlay_terrain_resources_min_level>
+    <overlay_terrain_start_level>4</overlay_terrain_start_level>
+  </config>
+
+</RasterProjectAsset>
