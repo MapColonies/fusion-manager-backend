@@ -1,8 +1,9 @@
 import os
 import subprocess
-from utils.xmlconverter import XMLConverter
+from xmlconverter import XMLConverter
 
-assets_path = "/opt/google/share/tutorials/fusion/assets/"
+# assets_path = "/opt/google/share/tutorials/fusion/assets/"
+assets_path = "C:/Users/Rasberey/Documents/fusion/assets/"
 projects_path = assets_path + "Projects/"
 resources_path = assets_path + "Resources/"
 imagery_path = projects_path + "Imagery/"
@@ -27,4 +28,3 @@ def get_project_inputs(json):
     print(inputs)
 
 read_main_xml(imagery_path + projects[0])
-
