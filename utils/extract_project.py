@@ -1,0 +1,67 @@
+import os
+import subprocess
+import json
+from extract_resource import extract_resource
+from datetime import datetime
+from xmlconverter import XMLConverter
+
+with open("utils/config.json") as file:
+    ASSETS_PATH = json.load(file)["FUSION_PATH"] + "assets/"
+PROJECTS_PATH = ASSETS_PATH + "Projects/"
+# RESOURCE_PATH = ASSETS_PATH + "Resources/"
+IMAGERY_PATH = PROJECTS_PATH + "Imagery/"
+
+def get_project(path, version):
+    
+    if not os.path.isdir(path):
+        print("Project does not exist")
+        return []
+    
+    versions = get_project_versions(path)
+    
+    if version not in versions:
+        print("Project has no such version")
+        return None
+    
+    full_path = path + f'/ver{version:03}'
+    
+    bash_command = f"find {full_path} -maxdepth 1 -iname 'khasset*.xml'"
+    xml_list = subprocess.check_output(bash_command, shell=True).splitlines()
+    xml_path = xml_list[0]
+    
+    json = XMLConverter.convert(xml_path)
+
+    resource_paths = get_project_resorce_paths(json)
+    
+    splitted_paths = [ split_resource_path(file) for file in resource_paths]
+    resources = [extract_resource(file, version) for file, version in splitted_paths]
+
+
+def get_project_versions(path_to_project):
+    bash_command = f"find {path_to_project} -maxdepth 1 -iname 'ver*'"
+    return [ int(line.decode('utf-8').split('/')[-1].replace("ver", "")) for line in subprocess.check_output(bash_command, shell=True).splitlines() ]
+    
+
+def get_project_resorce_paths(json):
+    inputs = json["inputs"]["input"]
+    inputs = inputs if isinstance(inputs, list) else [inputs]
+    return [ ASSETS_PATH + resources_path for resources_path in inputs ]
+    
+    # for path in inputs:
+    #     full_path = assets_path + path
+    #     print(get_creation_time(full_path))
+
+
+def get_creation_time(path):
+    json = XMLConverter.convert(path + "/khasset.xml")
+    return datetime.strptime(json["meta"]["item"][2], '%Y-%m-%dT%H:%M:%SZ')
+
+
+def split_resource_path(path):
+    resource_path, version = path.split("?")
+    version = version.split("=")[1]
+    return resource_path, version
+
+# Test
+projects = [ f.name for f in os.scandir(IMAGERY_PATH) if f.is_dir() ]
+get_project(IMAGERY_PATH + projects[0], 1)
