@@ -1,20 +1,24 @@
-import os
-import subprocess
 import json
-# from geefusion_project_server.projects.models import Project
 from .models import Project, ProjectResources
 from .extract_resource import get_resource
-from datetime import datetime
 from .xmlconverter import XMLConverter
 from .search import exists_with_version, get_version_xml
-import matplotlib.image as Image
 
 with open("projects/config.json") as file:
     ASSETS_PATH = json.load(file)["FUSION_PATH"] + "assets/"
-PROJECTS_PATH = ASSETS_PATH + "Projects/"
-IMAGERY_PATH = PROJECTS_PATH + "Imagery/"
+# PROJECTS_PATH = ASSETS_PATH + "Projects/"
+# IMAGERY_PATH = PROJECTS_PATH + "Imagery/"
 
 def get_project(path, version):
+
+    project_name = path.split("=")[0].split("/")[-1].split(".")[0]
+
+    # Check if resource exists in DB
+    query_set = Project.objects.filter(name=project_name, version=version)
+
+    if len(query_set) > 0:
+        data = query_set[0]
+        return [Project(data.name, data.version), '']
     
     # Check if project exists in the wanted version
     ans, reason = exists_with_version(path, version)
@@ -36,7 +40,7 @@ def get_project(path, version):
     splitted_paths = [ split_resource_path(file) for file in resource_paths]
     resources = [get_resource(file, version)[0] for file, version in splitted_paths]
 
-    project = Project(name="name", version=version)
+    project = Project(name=project_name, version=version)
     project.save()
 
     for resource in resources:

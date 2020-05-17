@@ -10,7 +10,7 @@ class ResourceSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Resource
-        fields = ('name', 'version', 'extent', 'thumbnail', 'takenAt', 'resolution')
+        fields = ('name', 'version', 'extent', 'thumbnail', 'takenAt', 'level', 'resolution')
 
 class ProjectSerializer(serializers.ModelSerializer):
 

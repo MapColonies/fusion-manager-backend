@@ -31,7 +31,13 @@ def about(request):
 def resource(request):
     
     resource_name = request.GET.get('name', 'bad')
-    resource_version = int(request.GET.get('version', ''))
+    resource_version = int(request.GET.get('version', '-1'))
+
+    if resource_name == 'bad':
+        return Response("Resource name wasn't provided")
+    
+    if resource_version == -1:
+        return Response("Resource version wasn't provided")
 
     # resource = get_resource('/opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/', 1)
     resource, error_message = get_resource_by_name(resource_name, resource_version)
