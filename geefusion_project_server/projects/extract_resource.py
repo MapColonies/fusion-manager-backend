@@ -26,7 +26,6 @@ def get_resource(path, version):
     # Check if resource exists in the wanted version
     ans, reason = exists_with_version(path, version)
     if not ans:
-        print(reason, path)
         return [None, reason]
     
     # Get resource xml

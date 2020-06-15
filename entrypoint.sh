@@ -1,4 +1,5 @@
 export DJANGO_DEBUG=False
+export FUSION_PATH="/opt/google/share/tutorials/fusion/"
 
 # Apply django migrations
 python3.7 manage.py makemigrations projects

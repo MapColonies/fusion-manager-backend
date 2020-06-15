@@ -18,12 +18,10 @@ def get_project(path, version):
     # Check if project exists in the wanted version
     ans, reason = exists_with_version(path, version)
     if not ans:
-        print(reason)
         return None
     
     # Get project xml
     xml_path = get_version_xml(path, version)
-    print(xml_path)
     
     # Convert xml to json
     json = XMLConverter.convert(xml_path)

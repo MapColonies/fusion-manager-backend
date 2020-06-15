@@ -14,7 +14,6 @@ def extract_resource(path, version, resolution):
     # Check if resource exists in the wanted version
     ans, reason = exists_with_version(path, version)
     if not ans:
-        print(reason)
         return None
     
     # Get resource xml
@@ -22,7 +21,6 @@ def extract_resource(path, version, resolution):
 
     resource_name = path.split("=")[0].split("/")[-1].split(".")[0]
     extent, thumbnail, creation_date = get_resource_data(xml_path)
-    print([resource_name, extent, creation_date, resolution])
 
     # return Resource()
 

@@ -27,7 +27,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '12345')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-print(DEBUG)
 
 ALLOWED_HOSTS = [
     os.environ.get('CURRENT_HOST', 'localhost'),
@@ -143,9 +142,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "projects", 'static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "projects", 'static')
+# ]
 
 
 if not DEBUG:
