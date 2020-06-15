@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,13 +21,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'vh=8d_l6min+od3aa^7l7@#2638#a-hqhjlewf1qfttwi&*7g&'
+# with open('/etc/django/secretKey.txt') as f:
+#     SECRET_KEY = f.read().strip()
+SECRET_KEY = os.environ.get('SECRET_KEY', '12345')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+print(DEBUG)
 
 ALLOWED_HOSTS = [
-    'localhost'
+    os.environ.get('CURRENT_HOST', 'localhost'),
+    '0.0.0.0',
+    '127.0.0.1'
 ]
 
 
@@ -51,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'geefusion_project_server.urls'
@@ -77,12 +84,25 @@ WSGI_APPLICATION = 'geefusion_project_server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# with open('/etc/django/database/dbname.txt') as f:
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': DJANGO_DATABASE,
+#         'USER': USER,
+#         'PASSWORD': PASSWORD,
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 
 # Password validation
@@ -122,7 +142,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, "projects", 'static')
 ]
+
+
+if not DEBUG:
+
+    # if not running on localhost then set DB
+    if 'localhost' not in ALLOWED_HOSTS:
+
+        DJANGO_DATABASE_LOCATION = os.getenv('DATABASE_LOCATION')
+        DJANGO_DATABASE = os.getenv('DATABASE_NAME')
+        USER = os.getenv('DATABASE_USER')
+        PASSWORD = os.getenv('DATABASE_PASSWORD')
+
+        DATABASES = {
+            'default': dj_database_url.config(default=f'postgres://{DJANGO_DATABASE_LOCATION}/{DJANGO_DATABASE}?user={USER}&password={PASSWORD}', conn_max_age=500)
+        }
+
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+
+    # SSL settings
+    #SECURE_SSL_REDIRECT = True
+    #SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    # Cookie settings
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True

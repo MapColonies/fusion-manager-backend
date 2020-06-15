@@ -8,16 +8,17 @@ import os
 import json
 from .extract_project import get_project
 from .extract_resource import get_resource, get_resource_by_name
+from .gee_paths import get_imagery_projects_path
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.template import loader
 
-with open("projects/config.json") as file:
-    ASSETS_PATH = json.load(file)["FUSION_PATH"] + "assets/"
-PROJECTS_PATH = ASSETS_PATH + "Projects/"
+# with open("projects/config.json") as file:
+#     ASSETS_PATH = json.load(file)["FUSION_PATH"] + "assets/"
+# PROJECTS_PATH = ASSETS_PATH + "Projects/"
 # RESOURCE_PATH = ASSETS_PATH + "Resources/"
-IMAGERY_PATH = PROJECTS_PATH + "Imagery/"
+IMAGERY_PATH = get_imagery_projects_path()
 
 @api_view(['GET'])
 def home(request):

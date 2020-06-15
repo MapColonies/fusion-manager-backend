@@ -3,11 +3,9 @@ from .models import Project, ProjectResources
 from .extract_resource import get_resource
 from .xmlconverter import XMLConverter
 from .search import exists_with_version, get_version_xml
+from .gee_paths import get_assets_path
 
-with open("projects/config.json") as file:
-    ASSETS_PATH = json.load(file)["FUSION_PATH"] + "assets/"
-# PROJECTS_PATH = ASSETS_PATH + "Projects/"
-# IMAGERY_PATH = PROJECTS_PATH + "Imagery/"
+ASSETS_PATH = get_assets_path()
 
 def get_project(path, version):
 
@@ -46,7 +44,7 @@ def get_project(path, version):
     for resource in resources:
         project.resources.add(resource)
 
-    return [project, ""]
+    return [project, '']
    
 
 def get_project_resorce_paths(json):

@@ -7,11 +7,11 @@ from django.db import models
 class Resource(models.Model):
     name = models.CharField(max_length=300, primary_key=True)
     version = models.PositiveIntegerField()
-    extent = models.CharField(max_length=50)
+    extent = models.CharField(max_length=200)
     thumbnail = models.ImageField(upload_to='static')
     takenAt = models.DateTimeField()
     level = models.PositiveIntegerField()
-    resolution = models.CharField(max_length=50)
+    resolution = models.CharField(max_length=25)
     
     def __str__(self):
         return self.name

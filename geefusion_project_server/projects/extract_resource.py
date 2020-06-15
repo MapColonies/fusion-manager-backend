@@ -3,12 +3,11 @@ from .models import Resource
 from datetime import datetime
 from .xmlconverter import XMLConverter
 from .search import exists_with_version, get_version_xml
-# import base64
 from django.core.files.base import ContentFile
+from .gee_paths import get_assets_path, get_imagery_resources_path
 
-with open("projects/config.json") as file:
-    ASSETS_PATH = json.load(file)["FUSION_PATH"] + "assets/"
-RESOURCE_PATH = ASSETS_PATH + "Resources/Imagery/"
+ASSETS_PATH = get_assets_path()
+RESOURCE_PATH = get_imagery_resources_path()
 
 
 def get_resource(path, version):
