@@ -2,17 +2,17 @@ import json
 from .models import Project, ProjectResources
 from .extract_resource import get_resource
 from .xmlconverter import XMLConverter
-from .search import exists_with_version, get_version_xml
-from .gee_paths import get_assets_path
+from .search import exists_with_version, get_version_xml, get_directory_in_directory_tree
+from .gee_paths import get_assets_path, get_imagery_projects_path
+from .extensions import get_project_extension
 
 ASSETS_PATH = get_assets_path()
+IMAGERY_PROJECT_PATH = get_imagery_projects_path()
 
-def get_project(path, version):
-
-    project_name = path.split("=")[0].split("/")[-1].split(".")[0]
+def get_project(path, name, version):
 
     # Check if resource exists in DB
-    query_set = Project.objects.filter(name=project_name, version=version)
+    query_set = Project.objects.filter(name=name, version=version)
 
     if len(query_set) > 0:
         data = query_set[0]
@@ -34,16 +34,36 @@ def get_project(path, version):
     
     # Get project resources
     splitted_paths = [ split_resource_path(file) for file in resource_paths]
-    resources = [get_resource(file, version)[0] for file, version in splitted_paths]
+    #resources = [get_resource(file, version)[0] for file, version in splitted_paths]
 
-    project = Project(name=project_name, version=version)
+    resources = []
+    for file, version in splitted_paths:
+
+        resource, reason = get_resource(file, version)
+        if not resource:
+            return [None, f'Failed getting resource {name}. Error message: {reason}. Resource directory was probably moved or deleted.']
+        
+        resources.append(resource)
+
+    project = Project(name=name, version=version)
     project.save()
 
     for resource in resources:
         project.resources.add(resource)
 
     return [project, '']
-   
+
+
+def get_project_by_name(name, version):
+    extension = get_project_extension()
+    path = get_directory_in_directory_tree(IMAGERY_PROJECT_PATH, name, extension)
+    #path = get_imagery_projects_path() + name + extension
+    print(path)
+    if not path:
+        return [None, 'No such project']
+    
+    return get_project(path, name, version)
+
 
 def get_project_resorce_paths(json):
     inputs = json["inputs"]["input"]

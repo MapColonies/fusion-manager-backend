@@ -1,21 +1,25 @@
 import json
+import os
 from .models import Resource
 from datetime import datetime
 from .xmlconverter import XMLConverter
-from .search import exists_with_version, get_version_xml
+from .search import exists_with_version, get_version_xml, get_directory_in_directory_tree
 from django.core.files.base import ContentFile
 from .gee_paths import get_assets_path, get_imagery_resources_path
+from .extensions import get_resource_extension
+from .string_utils import cd_path_n_times, get_path_suffix
 
 ASSETS_PATH = get_assets_path()
 RESOURCE_PATH = get_imagery_resources_path()
 
 
-def get_resource(path, version):
+def get_resource(path, version, name=None):
 
-    resource_name = path.split("=")[0].split("/")[-1].split(".")[0]
+    if name == None:
+        name = path.split("=")[0].split("/")[-1].split(".")[0]
 
     # Check if resource exists in DB
-    query_set = Resource.objects.filter(name=resource_name, version=version)
+    query_set = Resource.objects.filter(name=name, version=version)
 
     if len(query_set) > 0:
         data = query_set[0]
@@ -25,6 +29,7 @@ def get_resource(path, version):
     
     # Check if resource exists in the wanted version
     ans, reason = exists_with_version(path, version)
+    
     if not ans:
         return [None, reason]
     
@@ -34,7 +39,7 @@ def get_resource(path, version):
     extent, thumbnail, creation_date, level, resolution = get_resource_data(xml_path)
 
     # Create resource object
-    resource = Resource(name=resource_name, version=version, extent=extent, takenAt=creation_date, level=level, resolution=resolution)
+    resource = Resource(name=name, version=version, extent=extent, takenAt=creation_date, level=level, resolution=resolution)
     # Save thumbnail
     resource.thumbnail.save(thumbnail[0], thumbnail[1])
     # Save resource
@@ -43,17 +48,29 @@ def get_resource(path, version):
 
 
 def get_resource_by_name(name, version):
-    path = RESOURCE_PATH + name
-    return get_resource(path, version)
+    extension = get_resource_extension()
+    path = get_directory_in_directory_tree(RESOURCE_PATH, name, extension)
+    #path = RESOURCE_PATH + name + extension
+    if path == None:
+        return [None, 'No such resource']
+
+    return get_resource(path, version, name=name)
 
 
 def get_resource_data(xml_path):
+
     # Get resource metadata
     json = XMLConverter.convert(xml_path)
     metadata = json["meta"]["item"]
 
+    preview_path = ASSETS_PATH + metadata[-2]
+
+    # If the folder was moved, find paths by relative location
+    if not os.path.exists(ASSETS_PATH + preview_path):
+        preview_path = relatively_get_preview_path(preview_path, xml_path)
+
     # Read thumbnail
-    with open(ASSETS_PATH + metadata[-2], 'rb') as file:
+    with open(preview_path, 'rb') as file:
         thumbnail = [metadata[-2], ContentFile(file.read())]
     
     # Get the remaining metadata
@@ -63,6 +80,20 @@ def get_resource_data(xml_path):
     resolution = get_resource_resolution(level)
 
     return [ extent, thumbnail, creation_date, level, str(resolution) + ' m/px']
+
+
+def relatively_get_preview_path(original_preview_path, xml_path):
+
+    # Get version directory name from original path
+    version_dir = get_path_suffix(cd_path_n_times(original_preview_path, 1))
+    
+    # Go up in path 2 times
+    preview_path = cd_path_n_times(xml_path, 2)
+
+    # Attach wanted suffix
+    preview_path += f'/product.kia/{version_dir}/preview.png'
+
+    return preview_path
 
 
 def get_resource_resolution(resource_level):

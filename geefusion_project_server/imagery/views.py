@@ -1,14 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from .models import Resource
 from .serializers import ProjectSerializer, ResourceSerializer
 from datetime import datetime
 import os
 import json
-from .extract_project import get_project
+from .extract_project import get_project_by_name
 from .extract_resource import get_resource, get_resource_by_name
-from .gee_paths import get_imagery_projects_path
+from .search import get_all_projects_in_directory_tree, get_all_resources_in_directory_tree
+from .gee_paths import get_imagery_projects_path, get_imagery_resources_path
+from .extensions import get_project_extension
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -18,7 +20,8 @@ from django.template import loader
 #     ASSETS_PATH = json.load(file)["FUSION_PATH"] + "assets/"
 # PROJECTS_PATH = ASSETS_PATH + "Projects/"
 # RESOURCE_PATH = ASSETS_PATH + "Resources/"
-IMAGERY_PATH = get_imagery_projects_path()
+IMAGERY_PROJECT_PATH = get_imagery_projects_path()
+IMAGERY_RESOURCE_PATH = get_imagery_resources_path()
 
 @api_view(['GET'])
 def home(request):
@@ -27,6 +30,12 @@ def home(request):
 @api_view(['GET'])
 def about(request):
     return HttpResponse('<h1>About</h1>')
+
+@api_view(['GET'])
+def resources(request):
+
+    results = get_all_resources_in_directory_tree(IMAGERY_RESOURCE_PATH)
+    return JsonResponse({'resources': results})
 
 @api_view(['GET'])
 def resource(request):
@@ -59,6 +68,12 @@ def resource(request):
     # return HttpResponse(template.render(temp, request))
 
 @api_view(['GET'])
+def projects(request):
+
+    results = get_all_projects_in_directory_tree(IMAGERY_PROJECT_PATH)
+    return JsonResponse({'projects': results})
+
+@api_view(['GET'])
 def project(request):
     # temp = Resource(name='test', version='1', extent='extent', thumbnail=Image.imread("/opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/product.kia/ver001/preview.png"), takenAt=datetime.now(), resolution='1000x1000')
     # temp_serialized = serializers.serialize('json', [temp, ])
@@ -67,8 +82,7 @@ def project(request):
 
     project_name = request.GET.get('name', 'bad')
     project_version = int(request.GET.get('version', ''))
-
-    project, error_message = get_project(IMAGERY_PATH + project_name, project_version)
+    project, error_message = get_project_by_name(project_name, project_version)
 
     if error_message != "":
         return Response(error_message)
