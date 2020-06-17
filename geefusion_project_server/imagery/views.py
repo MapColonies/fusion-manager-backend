@@ -6,8 +6,8 @@ from .serializers import ProjectSerializer, ResourceSerializer
 from datetime import datetime
 import os
 import json
-from .extract_project import get_project_by_name
-from .extract_resource import get_resource, get_resource_by_name
+from .extract_project import get_project_by_name, get_project_versions
+from .extract_resource import get_resource, get_resource_by_name, get_resource_versions
 from .search import get_all_projects_in_directory_tree, get_all_resources_in_directory_tree
 from .gee_paths import get_imagery_projects_path, get_imagery_resources_path
 from .extensions import get_project_extension
@@ -16,10 +16,6 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.template import loader
 
-# with open("projects/config.json") as file:
-#     ASSETS_PATH = json.load(file)["FUSION_PATH"] + "assets/"
-# PROJECTS_PATH = ASSETS_PATH + "Projects/"
-# RESOURCE_PATH = ASSETS_PATH + "Resources/"
 IMAGERY_PROJECT_PATH = get_imagery_projects_path()
 IMAGERY_RESOURCE_PATH = get_imagery_resources_path()
 
@@ -33,7 +29,6 @@ def about(request):
 
 @api_view(['GET'])
 def resources(request):
-
     results = get_all_resources_in_directory_tree(IMAGERY_RESOURCE_PATH)
     return JsonResponse({'resources': results})
 
@@ -41,31 +36,26 @@ def resources(request):
 def resource(request):
     
     resource_name = request.GET.get('name', 'bad')
-    resource_version = int(request.GET.get('version', '-1'))
+    resource_version = request.GET.get('version', '')
 
     if resource_name == 'bad':
         return Response("Resource name wasn't provided")
     
-    if resource_version == -1:
-        return Response("Resource version wasn't provided")
+    # if resource_version == -1:
+    #     return Response("Resource version wasn't provided")
 
-    # resource = get_resource('/opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/', 1)
-    resource, error_message = get_resource_by_name(resource_name, resource_version)
+    if resource_version == '':
+        resource, error_message = get_resource_by_name(resource_name)
+    else:
+        resource, error_message = get_resource_by_name(resource_name, int(resource_version))
 
     if error_message != "":
         return Response(error_message)
-    
-    # TODO: Check that image is serverd correctly
+    print("yes")
+    versions = None if resource_version != '' else get_resource_versions(resource_name)
     serialized = ResourceSerializer(resource)
-    return Response(serialized.data)
-    # return Response(resource.thumbnail)
-
-    # temp = {
-    #     "data": serialized.data
-    # }
-
-    # template = loader.get_template('test.html')
-    # return HttpResponse(template.render(temp, request))
+    return Response(serialized.data) if not versions else Response({'versions': versions, 'latest': serialized.data})
+    # return Response(serialized.data)
 
 @api_view(['GET'])
 def projects(request):
@@ -81,20 +71,19 @@ def project(request):
     # return HttpResponse(temp_serialized, content_type="application/json")
 
     project_name = request.GET.get('name', 'bad')
-    project_version = int(request.GET.get('version', ''))
-    project, error_message = get_project_by_name(project_name, project_version)
+    project_version = request.GET.get('version', '')
+
+    if project_name == 'bad':
+        return Response("Project name wasn't provided")
+
+    if project_version == '':
+        project, error_message = get_project_by_name(project_name)
+    else:
+        project, error_message = get_project_by_name(project_name, int(project_version))
 
     if error_message != "":
         return Response(error_message)
-
-    # serialized = serializers.serialize('json', [get_project(IMAGERY_PATH + projects[0], 1), ])
+    
+    versions = None if project_version != '' else get_project_versions(project_name)
     serialized = ProjectSerializer(project)
-    # return HttpResponse(serialized, content_type="application/json")
-    return Response(serialized.data)
-
-# def JSONResponse(HttpResponse):
-
-#     def __init__(self, data, **kwargs):
-#         content = JSONRenderer().render(data)
-#         kwargs['content_type'] = 'application/json'
-#         super(JSONResponse, self).__init__(content, **kwargs)
+    return Response(serialized.data) if not versions else Response({'versions': versions, 'latest': serialized.data})

@@ -7,6 +7,7 @@ from django.db import models
 class Resource(models.Model):
     name = models.CharField(max_length=300, primary_key=True)
     version = models.PositiveIntegerField()
+    path = models.CharField(max_length=300)
     extent = models.CharField(max_length=200)
     thumbnail = models.ImageField(upload_to='static')
     takenAt = models.DateTimeField()
@@ -25,6 +26,7 @@ class Resource(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length=300, primary_key=True)
     version = models.PositiveIntegerField()
+    path = models.CharField(max_length=300)
     resources = models.ManyToManyField(Resource, through='ProjectResources')
 
     def __str__(self):
