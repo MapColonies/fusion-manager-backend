@@ -11,6 +11,7 @@ from .extract_resource import get_resource, get_resource_by_name, get_resource_v
 from .search import get_all_projects_in_directory_tree, get_all_resources_in_directory_tree
 from .gee_paths import get_imagery_projects_path, get_imagery_resources_path
 from .extensions import get_project_extension
+from .mask import mask_to_json
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -40,22 +41,21 @@ def resource(request):
 
     if resource_name == 'bad':
         return Response("Resource name wasn't provided")
-    
-    # if resource_version == -1:
-    #     return Response("Resource version wasn't provided")
 
     if resource_version == '':
-        resource, error_message = get_resource_by_name(resource_name)
+        resource, mask, error_message = get_resource_by_name(resource_name)
     else:
-        resource, error_message = get_resource_by_name(resource_name, int(resource_version))
+        resource, mask, error_message = get_resource_by_name(resource_name, int(resource_version))
 
     if error_message != "":
         return Response(error_message)
-    print("yes")
+    
     versions = None if resource_version != '' else get_resource_versions(resource_name)
+    
     serialized = ResourceSerializer(resource)
-    return Response(serialized.data) if not versions else Response({'versions': versions, 'latest': serialized.data})
-    # return Response(serialized.data)
+    data = serialized.data
+    data['mask'] = mask_to_json(mask)
+    return Response(data) if not versions else Response({'versions': versions, 'latest': data})
 
 @api_view(['GET'])
 def projects(request):

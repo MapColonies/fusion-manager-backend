@@ -1,6 +1,17 @@
 import os
 from django.db import models
 
+class Mask(models.Model):
+    no_mask = models.BooleanField()
+    feather = models.PositiveIntegerField(blank=True)
+    mode = models.CharField(max_length=20, blank=True)
+    band = models.PositiveIntegerField(blank=True)
+    fill_value = models.IntegerField(blank=True)
+    threshold = models.PositiveIntegerField(blank=True)
+    hole_size = models.PositiveIntegerField(blank=True)
+    white_fill = models.PositiveIntegerField(blank=True)
+    no_data = models.IntegerField(blank=True, null=True)
+
 # Resource model.
 # Represents a fusion resource.
 # Defined by name, version, extent, thumbnail, the time the resource was taken, level, and resolution.
@@ -13,6 +24,7 @@ class Resource(models.Model):
     takenAt = models.DateTimeField()
     level = models.PositiveIntegerField()
     resolution = models.CharField(max_length=25)
+    mask = models.OneToOneField(Mask, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.name

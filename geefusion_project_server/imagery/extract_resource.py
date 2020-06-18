@@ -1,6 +1,6 @@
 import json
 import os
-from .models import Resource
+from .models import Resource, Mask
 from datetime import datetime
 from .xmlconverter import XMLConverter
 from .search import exists_with_version, get_version_xml, get_directory_in_directory_tree, get_versions
@@ -24,32 +24,34 @@ def get_resource(path, version, name=None):
     
     if len(query_set) > 0:
         data = query_set[0]
-        resource = Resource(data.name, data.version, data.path, data.extent, data.thumbnail, data.takenAt, data.level, data.resolution)
+        mask = data.mask
+        mask.save()
+        resource = Resource(data.name, data.version, data.path, data.extent, data.thumbnail, data.takenAt, data.level, data.resolution, mask)
         resource.save()
-        return [resource, '']
+        return [resource, mask, '']
     
     # Check if resource exists in the wanted version
     ans, reason = exists_with_version(path, version)
     
     if not ans:
-        return [None, reason]
+        return [None, None, reason]
     
     # Get resource xml
     xml_path = get_version_xml(path, version)
     
-    data, reason = __get_resource_data__(xml_path)
+    data, reason = __get_data__(xml_path)
     if not data:
-        return [None, reason]
-
-    extent, thumbnail, creation_date, level, resolution = data
+        return [None, None, reason]
+    
+    extent, thumbnail, creation_date, level, resolution, mask = data
 
     # Create resource object
-    resource = Resource(name=name, version=version, path=path, extent=extent, takenAt=creation_date, level=level, resolution=resolution)
+    resource = Resource(name=name, version=version, path=path, extent=extent, takenAt=creation_date, level=level, resolution=resolution, mask=mask)
     # Save thumbnail
     resource.thumbnail.save(thumbnail[0], thumbnail[1])
     # Save resource
     resource.save()
-    return [resource, '']
+    return [resource, mask, '']
 
 
 def get_resource_by_name(name, version='latest'):
@@ -71,12 +73,77 @@ def get_resource_by_name(name, version='latest'):
     return get_resource(path, version, name=name)
 
 
-def __get_resource_data__(xml_path):
+def __get_data__(xml_path):
+    # Convert xml to json
+    json = XMLConverter.convert(xml_path)
+
+    # Get metadata
+    metadata, reason = __get_metadata__(xml_path, json)
+
+    if not metadata: return [metadata, reason]
+    
+    # Get config
+    config_data = __get_config_data__(json)
+    
+    data = []
+    data.extend(metadata)
+    data.extend(config_data)
+    return [data, '']
+
+
+def __get_metadata__(xml_path, json):
 
     # Get resource metadata
-    json = XMLConverter.convert(xml_path)
     metadata = json["meta"]["item"]
 
+    # Check that creation date is valid
+    date_taken = metadata[-1]
+    resource_name = get_file_name_from_path(json["name"])
+    if date_taken == '0000-00-00T00:00:00Z':
+        return [None, f"Resource date is invalid, please modify the following resource's date: {resource_name}"]
+    
+    # Read metadata
+    thumbnail = __get_preview__(xml_path, metadata)
+    extent = str(metadata[1])
+    creation_date = datetime.strptime(date_taken, '%Y-%m-%dT%H:%M:%SZ')
+    level = metadata[2] - 8
+    resolution = __get_resolution_by_level__(level)
+
+    return [[ extent, thumbnail, creation_date, level, str(resolution) + ' m/px'], '']
+
+
+def __get_config_data__(json):
+
+    config = json['config']
+
+    no_mask = int(config['nomask']) if 'nomask' in config else 0
+    # If no mask is defined
+    if no_mask == 1:
+        mask = Mask(no_mask=bool(no_mask), feather=100, mode='Mask', band=1, fill_value=-1,
+                    threshold=0, hole_size=0, white_fill=0, no_data=None)
+        mask.save()
+        return [mask]
+    
+    mask_gen_config = config['maskgenConfig']
+
+    # Get mask gen data
+    mask = Mask(
+        no_mask=no_mask,
+        feather=mask_gen_config['feather'],
+        mode=mask_gen_config['mode'],
+        band=mask_gen_config['band'],
+        fill_value=mask_gen_config['fillvalue'], 
+        threshold=mask_gen_config['threshold'],
+        hole_size=mask_gen_config['holesize'],
+        white_fill=mask_gen_config['whitefill'],
+        no_data=mask_gen_config['nodata']
+    )
+    mask.save()
+    return [mask]
+
+
+def __get_preview__(xml_path, metadata):
+    # Get preview's full path
     preview_path = ASSETS_PATH + metadata[-2]
 
     # If the folder was moved, find paths by relative location
@@ -87,20 +154,7 @@ def __get_resource_data__(xml_path):
     with open(preview_path, 'rb') as file:
         thumbnail = [metadata[-2], ContentFile(file.read())]
     
-    # Get the remaining metadata
-    extent = str(metadata[1])
-
-    date_taken = metadata[-1]
-    resource_name = get_file_name_from_path(json["name"])
-    if date_taken == '0000-00-00T00:00:00Z':
-        return [None, f"Resource date is invalid, please modify the following resource's date: {resource_name}"]
-
-    creation_date = datetime.strptime(date_taken, '%Y-%m-%dT%H:%M:%SZ')
-    level = metadata[2] - 8
-    
-    resolution = __get_resource_resolution__(level)
-
-    return [[ extent, thumbnail, creation_date, level, str(resolution) + ' m/px'], '']
+    return thumbnail
 
 
 def get_resource_versions(name):
@@ -122,7 +176,7 @@ def __relatively_get_preview_path__(original_preview_path, xml_path):
     return preview_path
 
 
-def __get_resource_resolution__(resource_level):
+def __get_resolution_by_level__(resource_level):
     # Calculate resource resolution
     LEVEL_0_RESOLUTION = 156412
     return LEVEL_0_RESOLUTION / 2 ** resource_level
