@@ -1,17 +1,16 @@
+import os
+import json
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from .models import Resource
 from .serializers import ProjectSerializer, ResourceSerializer
 from datetime import datetime
-import os
-import json
-from .extract_project import get_project_by_name, get_project_versions
-from .extract_resource import get_resource, get_resource_by_name, get_resource_versions
-from .search import get_all_projects_in_directory_tree, get_all_resources_in_directory_tree
-from .gee_paths import get_imagery_projects_path, get_imagery_resources_path
-from .extensions import get_project_extension
-from .mask import mask_to_json
+from utils.extract.extract_project import get_project_by_name, get_project_versions
+from utils.extract.extract_resource import get_resource, get_resource_by_name, get_resource_versions
+from utils.search import get_all_projects_in_directory_tree, get_all_resources_in_directory_tree
+from config.gee_paths import get_imagery_projects_path, get_imagery_resources_path
+from config.extensions import get_project_extension
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -46,7 +45,7 @@ def resource(request):
         resource, mask, error_message = get_resource_by_name(resource_name)
     else:
         resource, mask, error_message = get_resource_by_name(resource_name, int(resource_version))
-
+    
     if error_message != "":
         return Response(error_message)
     
@@ -54,7 +53,8 @@ def resource(request):
     
     serialized = ResourceSerializer(resource)
     data = serialized.data
-    data['mask'] = mask_to_json(mask)
+    
+    # data['mask'] = mask_to_json(mask)
     return Response(data) if not versions else Response({'versions': versions, 'latest': data})
 
 @api_view(['GET'])
@@ -83,7 +83,7 @@ def project(request):
 
     if error_message != "":
         return Response(error_message)
-    
+        
     versions = None if project_version != '' else get_project_versions(project_name)
     serialized = ProjectSerializer(project)
     return Response(serialized.data) if not versions else Response({'versions': versions, 'latest': serialized.data})

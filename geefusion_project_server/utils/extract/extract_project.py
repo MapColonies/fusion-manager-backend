@@ -1,13 +1,13 @@
 import json
 import os
-from .models import Project, ProjectResources
+from imagery.models import Project, ProjectResources
 from .extract_resource import get_resource
-from .xmlconverter import XMLConverter
-from .search import exists_with_version, get_versions, get_version_xml, get_directory_in_directory_tree
-from .gee_paths import get_assets_path, get_imagery_projects_path
-from .extensions import get_project_extension
-from .model_utils import get_path
-from .string_utils import get_path_suffix
+from utils.xmlconverter import XMLConverter
+from utils.search import exists_with_version, get_versions, get_version_xml, get_directory_in_directory_tree
+from config.gee_paths import get_assets_path, get_imagery_projects_path
+from config.extensions import get_project_extension
+from utils.model_utils import get_path
+from utils.string_utils import get_path_suffix
 
 ASSETS_PATH = get_assets_path()
 IMAGERY_PROJECT_PATH = get_imagery_projects_path()
@@ -18,8 +18,8 @@ def get_project(path, name, version):
     query_set = Project.objects.filter(name=name, version=version)
 
     if len(query_set) > 0:
-        data = query_set[0]
-        return [Project(data.name, data.version), '']
+        project = query_set[0]
+        return [project, '']
     
     # Check if project exists in the wanted version
     ans, reason = exists_with_version(path, version)
@@ -38,22 +38,21 @@ def get_project(path, name, version):
     # Get project resources
     splitted_paths = [ __split_resource_path__(file) for file in resource_paths]
     #resources = [get_resource(file, version)[0] for file, version in splitted_paths]
-
+    
     resources = []
     for file, version in splitted_paths:
-
-        resource, reason = get_resource(file, version)
+        resource, mask, reason = get_resource(file, version)
         if not resource:
             error_message = f'Failed getting resource {get_path_suffix(file)}. Error message: {reason}.'
             if reason == 'Does not exist': error_message += ' Resource may have been moved or deleted.'
             return [None, error_message]
         
         resources.append(resource)
-
-    project = Project(name=name, version=version, path=path)
-    project.save()
+    
+    project = Project.objects.create(name=name, version=version, path=path)
 
     for resource in resources:
+        print("yes")
         project.resources.add(resource)
 
     return [project, '']
@@ -65,7 +64,7 @@ def get_project_by_name(name, version='latest'):
     
     if not path:
         return [None, 'No such project']
-
+    
     if version == 'latest':
         versions = get_versions(path)
         version = max(versions)

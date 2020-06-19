@@ -1,6 +1,8 @@
 import os
 from django.db import models
 
+# Mask model.
+# Represents a resource mask values.
 class Mask(models.Model):
     no_mask = models.BooleanField()
     feather = models.PositiveIntegerField(blank=True)
@@ -14,15 +16,14 @@ class Mask(models.Model):
 
 # Resource model.
 # Represents a fusion resource.
-# Defined by name, version, extent, thumbnail, the time the resource was taken, level, and resolution.
 class Resource(models.Model):
-    name = models.CharField(max_length=300, primary_key=True)
+    name = models.CharField(max_length=300)
     version = models.PositiveIntegerField()
-    path = models.CharField(max_length=300)
+    path = models.CharField(max_length=300)                     # Path to the resource folder
     extent = models.CharField(max_length=200)
-    thumbnail = models.ImageField(upload_to='static')
-    takenAt = models.DateTimeField()
-    level = models.PositiveIntegerField()
+    thumbnail = models.ImageField(upload_to='static')           # Resource preview
+    takenAt = models.DateTimeField()                            # The time the resource was taken
+    level = models.PositiveIntegerField()                       # Resource resolution level
     resolution = models.CharField(max_length=25)
     mask = models.OneToOneField(Mask, on_delete=models.CASCADE)
     
@@ -36,10 +37,10 @@ class Resource(models.Model):
 # Represents a fusion project.
 # Defined by name, version and resources.
 class Project(models.Model):
-    name = models.CharField(max_length=300, primary_key=True)
+    name = models.CharField(max_length=300)
     version = models.PositiveIntegerField()
-    path = models.CharField(max_length=300)
-    resources = models.ManyToManyField(Resource, through='ProjectResources')
+    path = models.CharField(max_length=300)                                     # Path to the project folder
+    resources = models.ManyToManyField(Resource, through='ProjectResources')    # Associated resources
 
     def __str__(self):
         return self.name

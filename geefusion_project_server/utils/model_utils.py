@@ -1,6 +1,6 @@
-from .models import Project, Resource
-from .extensions import get_resource_extension, get_project_extension
-from .gee_paths import get_imagery_projects_path, get_imagery_resources_path
+from imagery.models import Project, Resource
+from config.extensions import get_resource_extension, get_project_extension
+from config.gee_paths import get_imagery_projects_path, get_imagery_resources_path
 from .search import get_directory_in_directory_tree, get_versions
 
 IMAGERY_PROJECT_PATH = get_imagery_projects_path()

@@ -1,14 +1,14 @@
 import json
 import os
-from .models import Resource, Mask
+from imagery.models import Resource, Mask
 from datetime import datetime
-from .xmlconverter import XMLConverter
-from .search import exists_with_version, get_version_xml, get_directory_in_directory_tree, get_versions
+from utils.xmlconverter import XMLConverter
+from utils.search import exists_with_version, get_version_xml, get_directory_in_directory_tree, get_versions
 from django.core.files.base import ContentFile
-from .gee_paths import get_assets_path, get_imagery_resources_path
-from .extensions import get_resource_extension
-from .string_utils import cd_path_n_times, get_path_suffix, get_file_name_from_path
-from .model_utils import get_path
+from config.gee_paths import get_assets_path, get_imagery_resources_path
+from config.extensions import get_resource_extension
+from utils.string_utils import cd_path_n_times, get_path_suffix, get_file_name_from_path
+from utils.model_utils import get_path
 
 ASSETS_PATH = get_assets_path()
 RESOURCE_PATH = get_imagery_resources_path()
@@ -18,16 +18,16 @@ def get_resource(path, version, name=None):
     
     if name == None:
         name = get_file_name_from_path(path)
-
+    
     # Check if resource exists in DB
     query_set = Resource.objects.filter(name=name, version=version)
     
     if len(query_set) > 0:
-        data = query_set[0]
-        mask = data.mask
-        mask.save()
-        resource = Resource(data.name, data.version, data.path, data.extent, data.thumbnail, data.takenAt, data.level, data.resolution, mask)
-        resource.save()
+        resource = query_set[0]
+        mask = resource.mask
+        # mask.save()
+        # resource = Resource(data.name, data.version, data.path, data.extent, data.thumbnail, data.takenAt, data.level, data.resolution, mask)
+        # resource.save()
         return [resource, mask, '']
     
     # Check if resource exists in the wanted version
@@ -57,16 +57,16 @@ def get_resource(path, version, name=None):
 def get_resource_by_name(name, version='latest'):
     extension = get_resource_extension()
     path = get_directory_in_directory_tree(RESOURCE_PATH, name, extension)
-    
+    print(path)
     if path == None:
-        return [None, 'No such resource']
+        return [None, None, 'No such resource']
     
     if version == 'latest':
         versions = get_versions(path)
 
         # If the resource has no versions
         if len(versions) == 0:
-            return [None, 'Resource has no versions']
+            return [None, None, 'Resource has no versions']
 
         version = max(versions)
     
