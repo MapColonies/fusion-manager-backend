@@ -2,6 +2,7 @@ import os
 import subprocess
 from config.extensions import get_project_extension, get_resource_extension
 from .xmlconverter import XMLConverter
+from config.filenames import get_main_xml_name, get_version_xml_name
 
 def exists_with_version(path, version):
 
@@ -39,12 +40,18 @@ def get_versions(path):
     return valid_versions
 
 
+def get_main_xml(path):
+    main_xml_name = get_main_xml_name()
+    return '/'.join([path, main_xml_name])
+
+
 def get_version_xml(path, version):
 
     full_path = path + f'/ver{version:03}'
     
     # Get version xml
-    bash_command = f"find {full_path} -maxdepth 1 -iname 'khasset*.xml'"
+    xml_name = get_version_xml_name()
+    bash_command = f"find {full_path} -maxdepth 1 -iname {xml_name}"
     xml_list = subprocess.check_output(bash_command, shell=True).splitlines()
     return xml_list[0].decode("utf-8")
 
@@ -101,15 +108,5 @@ def __get_all_in_directory_tree__(root_directory, extension, check_for_versions)
 
                 # remove for directory list so walk wouldn't go in
                 dirs.remove(dir)
-
-        # for dir in wanted_sub_directories:
-        #     # remove extension
-        #     name = dir[:-len(extension)]
-
-        #     # add dir to results
-        #     wanted_directories.append(name)
-
-        #     # remove for directory list so walk wouldn't go in
-        #     dirs.remove(dir)
     
     return wanted_directories

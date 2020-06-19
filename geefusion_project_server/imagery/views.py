@@ -53,8 +53,6 @@ def resource(request):
     
     serialized = ResourceSerializer(resource)
     data = serialized.data
-    
-    # data['mask'] = mask_to_json(mask)
     return Response(data) if not versions else Response({'versions': versions, 'latest': data})
 
 @api_view(['GET'])
@@ -65,11 +63,6 @@ def projects(request):
 
 @api_view(['GET'])
 def project(request):
-    # temp = Resource(name='test', version='1', extent='extent', thumbnail=Image.imread("/opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/product.kia/ver001/preview.png"), takenAt=datetime.now(), resolution='1000x1000')
-    # temp_serialized = serializers.serialize('json', [temp, ])
-    # with open("/opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/product.kia/ver001/preview.png", "rb") as image:
-    # return HttpResponse(temp_serialized, content_type="application/json")
-
     project_name = request.GET.get('name', 'bad')
     project_version = request.GET.get('version', '')
 
@@ -83,7 +76,10 @@ def project(request):
 
     if error_message != "":
         return Response(error_message)
-        
+
     versions = None if project_version != '' else get_project_versions(project_name)
     serialized = ProjectSerializer(project)
-    return Response(serialized.data) if not versions else Response({'versions': versions, 'latest': serialized.data})
+    data = serialized.data
+
+    if project.version == 0: project.delete()
+    return Response(data) if not versions else Response({'versions': versions, 'latest': data})

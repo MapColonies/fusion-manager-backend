@@ -37,8 +37,13 @@ class ResourceSerializer(serializers.ModelSerializer):
 
 class ProjectSerializer(serializers.ModelSerializer):
     resources = ResourceSerializer(many=True)
+    version = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
         fields = ('name', 'version', 'resources')
         depth = 2
+    
+    def get_version(self, obj):
+        version = obj.version
+        return version if version != 0 else None

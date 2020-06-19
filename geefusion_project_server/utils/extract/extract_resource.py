@@ -15,9 +15,16 @@ RESOURCE_PATH = get_imagery_resources_path()
 
 
 def get_resource(path, version, name=None):
-    
+    # Set name if missing
     if name == None:
         name = get_file_name_from_path(path)
+    
+    # Set version to latest version if requested
+    if version == 'latest':
+        version = __get_latest_version__(path)
+        # If the resource has no versions
+        if version == 0:
+            return [None, None, 'Resource has no versions']
     
     # Check if resource exists in DB
     query_set = Resource.objects.filter(name=name, version=version)
@@ -25,9 +32,6 @@ def get_resource(path, version, name=None):
     if len(query_set) > 0:
         resource = query_set[0]
         mask = resource.mask
-        # mask.save()
-        # resource = Resource(data.name, data.version, data.path, data.extent, data.thumbnail, data.takenAt, data.level, data.resolution, mask)
-        # resource.save()
         return [resource, mask, '']
     
     # Check if resource exists in the wanted version
@@ -57,20 +61,18 @@ def get_resource(path, version, name=None):
 def get_resource_by_name(name, version='latest'):
     extension = get_resource_extension()
     path = get_directory_in_directory_tree(RESOURCE_PATH, name, extension)
-    print(path)
     if path == None:
         return [None, None, 'No such resource']
     
-    if version == 'latest':
-        versions = get_versions(path)
-
-        # If the resource has no versions
-        if len(versions) == 0:
-            return [None, None, 'Resource has no versions']
-
-        version = max(versions)
-    
     return get_resource(path, version, name=name)
+
+
+def __get_latest_version__(path):
+    versions = get_versions(path)
+    # If the resource has no versions
+    if len(versions) == 0:
+        return 0
+    return max(versions)
 
 
 def __get_data__(xml_path):
