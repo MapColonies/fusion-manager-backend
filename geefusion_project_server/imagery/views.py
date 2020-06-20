@@ -36,12 +36,12 @@ def resources(request):
 def resource(request):
     
     resource_name = request.GET.get('name', 'bad')
-    resource_version = request.GET.get('version', '')
+    resource_version = request.GET.get('version', 'latest')
 
     if resource_name == 'bad':
         return Response("Resource name wasn't provided")
 
-    if resource_version == '':
+    if resource_version == 'latest':
         resource, mask, error_message = get_resource_by_name(resource_name)
     else:
         resource, mask, error_message = get_resource_by_name(resource_name, int(resource_version))
@@ -64,12 +64,12 @@ def projects(request):
 @api_view(['GET'])
 def project(request):
     project_name = request.GET.get('name', 'bad')
-    project_version = request.GET.get('version', '')
+    project_version = request.GET.get('version', 'latest')
 
     if project_name == 'bad':
         return Response("Project name wasn't provided")
 
-    if project_version == '':
+    if project_version == 'latest':
         project, error_message = get_project_by_name(project_name)
     else:
         project, error_message = get_project_by_name(project_name, int(project_version))
