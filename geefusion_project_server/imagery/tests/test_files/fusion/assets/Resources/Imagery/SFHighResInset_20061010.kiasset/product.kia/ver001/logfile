@@ -1,0 +1,84 @@
+BUILD HOST: shimon-Inspiron-3537
+FUSION VERSION 5.3.5, BUILD 2020-06-02
+STARTTIME: 2020-06-17 19:59:05
+
+COMMAND: gerasterimport --imagery /opt/google/share/tutorials/fusion/src/Imagery/usgsSFHiRes.tif -o /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/product.kia/ver001/raster.kip --north_boundary 90 --south_boundary -90 --east_boundary 180 --west_boundary -180
+---------- Start Command Output ----------
+Input File Sizes
+  72.8 MB : /opt/google/share/tutorials/fusion/src/Imagery/usgsSFHiRes.tif
+  72.8 MB : TOTAL Input File Sizes
+Total tiles to process: 83
+Fusion Notice:	Reprojecting source using Cubic
+Fusion Notice:	Approximating transform ...
+Completed  12% (10/83) - tiles/sec: 9.43 - time left: 00:00:08 [CPU: 88 Mem: 296 MB PF: 0]
+Completed  23% (19/83) - tiles/sec: 6.91 - time left: 00:00:09 [CPU: 49 Mem: 329 MB PF: 0]
+Completed  30% (25/83) - tiles/sec: 4.85 - time left: 00:00:12 [CPU: 41 Mem: 345 MB PF: 0]
+Completed  40% (33/83) - tiles/sec: 4.47 - time left: 00:00:11 [CPU: 44 Mem: 362 MB PF: 0]
+Completed  49% (41/83) - tiles/sec: 4.65 - time left: 00:00:09 [CPU: 55 Mem: 362 MB PF: 0]
+Completed  59% (49/83) - tiles/sec: 4.90 - time left: 00:00:07 [CPU: 61 Mem: 362 MB PF: 0]
+Completed  69% (57/83) - tiles/sec: 4.86 - time left: 00:00:05 [CPU: 61 Mem: 363 MB PF: 0]
+Completed  80% (66/83) - tiles/sec: 5.60 - time left: 00:00:03 [CPU: 59 Mem: 363 MB PF: 0]
+Completed  87% (72/83) - tiles/sec: 7.62 - time left: 00:00:01 [CPU: 61 Mem: 364 MB PF: 0]
+Completed  98% (81/83) - tiles/sec: 11.35 - time left: 00:00:00 [CPU: 63 Mem: 373 MB PF: 0]
+Completed 100% (83/83) - tiles/sec: 14.63 - time left: 00:00:00 [CPU: 64 Mem: 315 MB PF: 0]
+Processed 83 tiles
+Total time to process: 00:00:12
+Average tiles per second: 7.10
+Output File Sizes
+  39.9 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/product.kia/ver001/raster.kip
+  39.9 MB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+         13.81 real time
+          7.49 user time
+          0.31 system time
+           56% CPU usage average
+             0 swaps
+             0 page faults
+          1332 I/O context switches
+Peak memory used for this job: 384960 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 19:59:19
+ELAPSEDTIME: 14 seconds
+COMPLETED SUCCESSFULLY
+
+COMMAND: gemaskgen --oformat=PNG --preview --maxsize=1024 /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/product.kia/ver001/raster.kip /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/product.kia/ver001/preview.png
+---------- Start Command Output ----------
+Input File Sizes
+  39.9 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/product.kia/ver001/raster.kip
+  39.9 MB : TOTAL Input File Sizes
+Fusion Notice:	raster type: Imagery
+Fusion Notice:	num components: 3
+Fusion Notice:	component size: 1
+Fusion Notice:	component type: UInt8
+Fusion Notice:	min, max product levels: 8, 26
+Fusion Notice:	image size at max product level, pixels: (wh) 6397, 5076
+Fusion Notice:	Mask parameters:
+Fusion Notice:	band selection: 1
+Fusion Notice:	automatic level selection for generating mask: 23
+Fusion Notice:	output image offset, pixels: (xy) 175, 938
+Fusion Notice:	output image size, pixels: (wh) 800, 635
+Fusion Notice:	adjusted feather size: 0
+Fusion Notice:	adjusted hole size: 0
+Fusion Notice:	Flood filling image in memory
+Flooded 1 tiles (1000.0/sec) in 00:00:00
+Fusion Notice:	Writing imagery preview /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/product.kia/ver001/preview.png
+Output File Sizes
+  1.4 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/product.kia/ver001/preview.png
+  1.4 MB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+          0.33 real time
+          0.32 user time
+          0.01 system time
+           99% CPU usage average
+             0 swaps
+             0 page faults
+             3 I/O context switches
+Peak memory used for this job: 240560 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 19:59:19
+ELAPSEDTIME: 0 seconds
+COMPLETED SUCCESSFULLY
+
+TOTAL ELAPSEDTIME: 14 seconds

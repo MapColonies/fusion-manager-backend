@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<RasterProductAssetVersion>
+
+  <name>Resources/Imagery/SFHighResInset_20061010.kiasset?version=2</name>
+
+  <type>Imagery</type>
+
+  <subtype>Product</subtype>
+
+  <version>2</version>
+
+  <state>Succeeded</state>
+
+  <progress>0</progress>
+
+  <locked>0</locked>
+
+  <inputs>
+    <input>Resources/Imagery/SFHighResInset_20061010.kiasset/source.kisource?version=1</input>
+  </inputs>
+
+  <children>
+    <children_element>Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia?version=1</children_element>
+  </children>
+
+  <parents/>
+
+  <listeners/>
+
+  <outfiles/>
+
+  <meta>
+    <item key="createdtime">2020-06-17 20:19:35</item>
+    <item key="extents">37.816513180732727,37.789283394813538,-122.38983571529388,-122.42415189743042</item>
+    <item key="maxlevel">26</item>
+    <item key="minlevel">8</item>
+    <item key="preview">Resources/Imagery/SFHighResInset_20061010.kiasset/product.kia/ver001/preview.png</item>
+    <item key="sourcedate">2020-06-17T00:00:00Z</item>
+  </meta>
+
+  <beginTime>0</beginTime>
+
+  <progressTime>0</progressTime>
+
+  <endTime>0</endTime>
+
+  <taskid>0</taskid>
+
+  <config>
+    <fill></fill>
+    <srs></srs>
+    <clampNonnegative>0</clampNonnegative>
+    <maskgenConfig>
+      <feather>100</feather>
+      <mode>Mask</mode>
+      <band>1</band>
+      <fillvalue>-1</fillvalue>
+      <threshold>0</threshold>
+      <holesize>0</holesize>
+      <whitefill>0</whitefill>
+      <nodata></nodata>
+    </maskgenConfig>
+    <fuid_resource>1001</fuid_resource>
+    <provider_id>1</provider_id>
+  </config>
+
+</RasterProductAssetVersion>

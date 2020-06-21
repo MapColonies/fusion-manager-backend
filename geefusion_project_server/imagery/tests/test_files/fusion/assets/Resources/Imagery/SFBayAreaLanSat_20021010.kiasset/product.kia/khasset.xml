@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<KRPAsset>
+
+  <name>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia</name>
+
+  <type>Imagery</type>
+
+  <subtype>KRP</subtype>
+
+  <inputs>
+    <input>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/source.kisource?version=1</input>
+  </inputs>
+
+  <meta/>
+
+  <versions>
+    <version>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia?version=1</version>
+  </versions>
+
+  <config>
+    <scale>1</scale>
+    <clampNonnegative>0</clampNonnegative>
+    <overridesrs></overridesrs>
+    <useMercatorProjection>0</useMercatorProjection>
+    <north_boundary>90</north_boundary>
+    <south_boundary>-90</south_boundary>
+    <east_boundary>180</east_boundary>
+    <west_boundary>-180</west_boundary>
+  </config>
+
+</KRPAsset>

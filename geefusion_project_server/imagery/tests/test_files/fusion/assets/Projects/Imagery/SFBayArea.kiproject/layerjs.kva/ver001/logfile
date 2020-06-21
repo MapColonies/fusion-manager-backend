@@ -1,0 +1,20 @@
+BUILD HOST: shimon-Inspiron-3537
+FUSION VERSION 5.3.5, BUILD 2020-06-02
+STARTTIME: 2020-06-17 20:01:36
+
+COMMAND: gelayerjsgen --config /opt/google/share/tutorials/fusion/assets/Projects/Imagery/SFBayArea.kiproject/layerjs.kva/ver001/config.xml /opt/google/share/tutorials/fusion/assets/Projects/Imagery/SFBayArea.kiproject/layerjs.kva/ver001/layerjs
+---------- Start Command Output ----------
+----------------------------- ----------
+Process Stats
+          0.10 real time
+          0.02 user time
+          0.01 system time
+           36% CPU usage average
+             0 swaps
+             1 page faults
+             6 I/O context switches
+Peak memory used for this job: 227436 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 20:01:36
+ELAPSEDTIME: 0 seconds
+COMPLETED SUCCESSFULLY

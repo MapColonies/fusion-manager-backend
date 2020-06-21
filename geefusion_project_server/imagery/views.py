@@ -30,7 +30,7 @@ def about(request):
 @api_view(['GET'])
 def resources(request):
     results = get_all_resources_in_directory_tree(IMAGERY_RESOURCE_PATH)
-    return JsonResponse({'resources': results})
+    return Response({'resources': results})
 
 @api_view(['GET'])
 def resource(request):
@@ -49,7 +49,7 @@ def resource(request):
     if error_message != "":
         return Response(error_message)
     
-    versions = None if resource_version != '' else get_resource_versions(resource_name)
+    versions = None if resource_version != 'latest' else get_resource_versions(resource_name)
     
     serialized = ResourceSerializer(resource)
     data = serialized.data
@@ -57,9 +57,8 @@ def resource(request):
 
 @api_view(['GET'])
 def projects(request):
-
     results = get_all_projects_in_directory_tree(IMAGERY_PROJECT_PATH)
-    return JsonResponse({'projects': results})
+    return Response({'projects': results})
 
 @api_view(['GET'])
 def project(request):
@@ -77,7 +76,7 @@ def project(request):
     if error_message != "":
         return Response(error_message)
 
-    versions = None if project_version != '' else get_project_versions(project_name)
+    versions = None if project_version != 'latest' else get_project_versions(project_name)
     serialized = ProjectSerializer(project)
     data = serialized.data
 

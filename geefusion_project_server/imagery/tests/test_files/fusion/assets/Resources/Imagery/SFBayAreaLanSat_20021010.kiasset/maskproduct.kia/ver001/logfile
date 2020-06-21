@@ -1,0 +1,36 @@
+BUILD HOST: shimon-Inspiron-3537
+FUSION VERSION 5.3.5, BUILD 2020-06-02
+STARTTIME: 2020-06-17 19:59:56
+
+COMMAND: gerasterimport --alphamask /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/maskgen.kia/ver001/mask.tif --dataproduct /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia/ver001/raster.kip -o /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/maskproduct.kia/ver001/mask.kmp
+---------- Start Command Output ----------
+Input File Sizes
+  48.1 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/maskgen.kia/ver001/mask.tif
+  48.1 MB : TOTAL Input File Sizes
+Total tiles to process: 105
+Fusion Notice:	Simple read from source
+Completed  90% (95/105) - tiles/sec: 94.91 - time left: 00:00:00 [CPU: 103 Mem: 289 MB PF: 2]
+Completed 100% (105/105) - tiles/sec: 95.45 - time left: 00:00:00 [CPU: 112 Mem: 284 MB PF: 2]
+Processed 105 tiles
+Total time to process: 00:00:01
+Average tiles per second: 95.45
+Fusion Notice:	Closing file /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/maskproduct.kia/ver001/mask.kmp/opacity.
+Fusion Notice:	Copying created file: /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/maskproduct.kia/ver001/mask.kmp/opacity
+Output File Sizes
+  519.1 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/maskproduct.kia/ver001/mask.kmp
+  126.5 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia/ver001/raster.kip
+  127.0 MB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+          1.94 real time
+          1.07 user time
+          0.08 system time
+           59% CPU usage average
+             0 swaps
+             2 page faults
+            51 I/O context switches
+Peak memory used for this job: 305352 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 19:59:58
+ELAPSEDTIME: 2 seconds
+COMPLETED SUCCESSFULLY

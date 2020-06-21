@@ -1,0 +1,35 @@
+BUILD HOST: shimon-Inspiron-3537
+FUSION VERSION 5.3.5, BUILD 2020-06-02
+STARTTIME: 2020-06-17 19:59:21
+
+COMMAND: gerasterimport --alphamask /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/maskgen.kia/ver001/mask.tif --dataproduct /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/product.kia/ver001/raster.kip -o /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/maskproduct.kia/ver001/mask.kmp
+---------- Start Command Output ----------
+Input File Sizes
+  32.5 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/maskgen.kia/ver001/mask.tif
+  32.5 MB : TOTAL Input File Sizes
+Total tiles to process: 83
+Fusion Notice:	Simple read from source
+Completed 100% (83/83) - tiles/sec: 85.74 - time left: 00:00:00 [CPU: 25 Mem: 275 MB PF: 74]
+Processed 83 tiles
+Total time to process: 00:00:01
+Average tiles per second: 85.74
+Fusion Notice:	Closing file /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/maskproduct.kia/ver001/mask.kmp/opacity.
+Fusion Notice:	Copying created file: /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/maskproduct.kia/ver001/mask.kmp/opacity
+Output File Sizes
+  402.0 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/maskproduct.kia/ver001/mask.kmp
+  39.9 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/product.kia/ver001/raster.kip
+  40.3 MB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+          4.23 real time
+          0.96 user time
+          0.07 system time
+           24% CPU usage average
+             0 swaps
+            74 page faults
+           133 I/O context switches
+Peak memory used for this job: 302292 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 19:59:25
+ELAPSEDTIME: 4 seconds
+COMPLETED SUCCESSFULLY

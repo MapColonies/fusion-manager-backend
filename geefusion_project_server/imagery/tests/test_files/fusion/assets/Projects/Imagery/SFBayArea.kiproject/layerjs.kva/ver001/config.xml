@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<MapLayerJSConfig>
+
+  <layers>
+    <layer>
+      <type>Imagery</type>
+      <projection>FlatProjection</projection>
+      <channel_id>1000</channel_id>
+      <index_version>1</index_version>
+      <legend>
+        <defaultLocale>
+          <name useDefault="0">Imagery</name>
+          <isChecked useDefault="0">1</isChecked>
+          <desc useDefault="0"></desc>
+          <lookAt useDefault="0"></lookAt>
+          <icon useDefault="0">
+            <type>Internal</type>
+            <href>773</href>
+          </icon>
+        </defaultLocale>
+        <locales/>
+      </legend>
+    </layer>
+  </layers>
+
+</MapLayerJSConfig>

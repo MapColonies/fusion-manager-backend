@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<RasterProduct>
+
+  <type>AlphaMask</type>
+
+  <compression>LZ</compression>
+
+  <compressionQuality>5</compressionQuality>
+
+  <numComponents>1</numComponents>
+
+  <componentType>UInt8</componentType>
+
+  <tileResolution>1024</tileResolution>
+
+  <minLevel>8</minLevel>
+
+  <maxLevel>26</maxLevel>
+
+  <degExtents>
+    <beginx>-122.42415189743042</beginx>
+    <endx>-122.38983571529388</endx>
+    <beginy>37.789283394813538</beginy>
+    <endy>37.816513180732727</endy>
+  </degExtents>
+
+  <projectionType>Flat</projectionType>
+
+</RasterProduct>

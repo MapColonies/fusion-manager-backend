@@ -1,0 +1,20 @@
+BUILD HOST: shimon-Inspiron-3537
+FUSION VERSION 5.3.5, BUILD 2020-06-02
+STARTTIME: 2020-06-17 20:01:36
+
+COMMAND: gerasterdbrootgen --imagery --config /opt/google/share/tutorials/fusion/assets/Projects/Imagery/SFBayArea.kiproject/dbroot.kia/ver001/config.xml /opt/google/share/tutorials/fusion/assets/Projects/Imagery/SFBayArea.kiproject/dbroot.kia/ver001/dbroot
+---------- Start Command Output ----------
+----------------------------- ----------
+Process Stats
+          0.28 real time
+          0.02 user time
+          0.01 system time
+           14% CPU usage average
+             0 swaps
+             4 page faults
+            10 I/O context switches
+Peak memory used for this job: 232332 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 20:01:36
+ELAPSEDTIME: 0 seconds
+COMPLETED SUCCESSFULLY

@@ -1,0 +1,87 @@
+BUILD HOST: shimon-Inspiron-3537
+FUSION VERSION 5.3.5, BUILD 2020-06-02
+STARTTIME: 2020-06-17 20:01:56
+
+COMMAND: geindexgen --type=Imagery --stack /opt/google/share/tutorials/fusion/assets/Projects/Imagery/SFBayArea.kiproject/geindex.kia/ver001/stackfile --output /opt/google/share/tutorials/fusion/assets/Projects/Imagery/SFBayArea.kiproject/geindex.kia/ver001/SFBayArea-v1.geindex
+---------- Start Command Output ----------
+Input File Sizes
+  15.3 KB : /opt/google/share/tutorials/fusion/assets/Projects/Imagery/SFBayArea.kiproject/geindex.kia/ver001/stackfile
+  11.3 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/CombinedRP.kia/packgen.kia/packlevel06.kia/ver001/packlevel06.kipacket
+  3.3 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/CombinedRP.kia/packgen.kia/packlevel05.kia/ver001/packlevel05.kipacket
+  927.5 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/CombinedRP.kia/packgen.kia/packlevel04.kia/ver001/packlevel04.kipacket
+  273.2 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/CombinedRP.kia/packgen.kia/packlevel03.kia/ver001/packlevel03.kipacket
+  84.7 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/CombinedRP.kia/packgen.kia/packlevel02.kia/ver001/packlevel02.kipacket
+  39.6 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/CombinedRP.kia/packgen.kia/packlevel01.kia/ver001/packlevel01.kipacket
+  11.8 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/CombinedRP.kia/packgen.kia/packlevel00.kia/ver001/packlevel00.kipacket
+  26.8 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel13.kia/ver001/packlevel13.kipacket
+  8.2 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel12.kia/ver001/packlevel12.kipacket
+  2.2 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel11.kia/ver001/packlevel11.kipacket
+  579.0 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel10.kia/ver001/packlevel10.kipacket
+  159.5 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel09.kia/ver001/packlevel09.kipacket
+  69.6 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel08.kia/ver001/packlevel08.kipacket
+  37.9 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel07.kia/ver001/packlevel07.kipacket
+  1.5 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel06.kia/ver001/packlevel06.kipacket
+  1.6 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel05.kia/ver001/packlevel05.kipacket
+  1.5 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel04.kia/ver001/packlevel04.kipacket
+  884.7 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel03.kia/ver001/packlevel03.kipacket
+  912.3 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel02.kia/ver001/packlevel02.kipacket
+  265.6 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel01.kia/ver001/packlevel01.kipacket
+  12.4 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia/packgen.kia/packlevel00.kia/ver001/packlevel00.kipacket
+  1.1 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel14.kia/ver001/packlevel14.kipacket
+  371.6 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel13.kia/ver001/packlevel13.kipacket
+  116.5 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel12.kia/ver001/packlevel12.kipacket
+  79.9 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel11.kia/ver001/packlevel11.kipacket
+  25.8 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel10.kia/ver001/packlevel10.kipacket
+  11.3 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel09.kia/ver001/packlevel09.kipacket
+  8.8 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel08.kia/ver001/packlevel08.kipacket
+  16.1 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel07.kia/ver001/packlevel07.kipacket
+  1.5 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel06.kia/ver001/packlevel06.kipacket
+  1.6 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel05.kia/ver001/packlevel05.kipacket
+  1.5 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel04.kia/ver001/packlevel04.kipacket
+  884.7 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel03.kia/ver001/packlevel03.kipacket
+  912.3 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel02.kia/ver001/packlevel02.kipacket
+  265.6 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel01.kia/ver001/packlevel01.kipacket
+  12.4 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia/packgen.kia/packlevel00.kia/ver001/packlevel00.kipacket
+  8.2 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel18.kia/ver001/packlevel18.kipacket
+  2.7 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel17.kia/ver001/packlevel17.kipacket
+  757.6 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel16.kia/ver001/packlevel16.kipacket
+  237.4 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel15.kia/ver001/packlevel15.kipacket
+  93.9 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel14.kia/ver001/packlevel14.kipacket
+  37.2 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel13.kia/ver001/packlevel13.kipacket
+  28.8 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel12.kia/ver001/packlevel12.kipacket
+  34.1 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel11.kia/ver001/packlevel11.kipacket
+  16.5 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel10.kia/ver001/packlevel10.kipacket
+  11.3 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel09.kia/ver001/packlevel09.kipacket
+  8.8 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel08.kia/ver001/packlevel08.kipacket
+  16.1 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel07.kia/ver001/packlevel07.kipacket
+  12.7 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel06.kia/ver001/packlevel06.kipacket
+  1.6 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel05.kia/ver001/packlevel05.kipacket
+  1.5 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel04.kia/ver001/packlevel04.kipacket
+  884.7 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel03.kia/ver001/packlevel03.kipacket
+  912.3 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel02.kia/ver001/packlevel02.kipacket
+  265.6 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel01.kia/ver001/packlevel01.kipacket
+  12.4 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFHighResInset_20061010.kiasset/CombinedRP.kia/packgen.kia/packlevel00.kia/ver001/packlevel00.kipacket
+  86.3 MB : TOTAL Input File Sizes
+Calculating work to be done ... Finished.
+Total checks to process: 7857
+Completed 100% (7857/7857) - checks/sec: 374142.86 - time left: 00:00:00 [CPU: 7 Mem: 496 MB PF: 4]
+Processed 7857 checks
+Total time to process: 00:00:00
+Average checks per second: 374142.86
+Output File Sizes
+  242.4 KB : /opt/google/share/tutorials/fusion/assets/Projects/Imagery/SFBayArea.kiproject/geindex.kia/ver001/SFBayArea-v1.geindex
+  242.4 KB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+          0.08 real time
+          0.06 user time
+          0.02 system time
+          106% CPU usage average
+             0 swaps
+             4 page faults
+          2394 I/O context switches
+Peak memory used for this job: 508036 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 20:01:56
+ELAPSEDTIME: 0 seconds
+COMPLETED SUCCESSFULLY

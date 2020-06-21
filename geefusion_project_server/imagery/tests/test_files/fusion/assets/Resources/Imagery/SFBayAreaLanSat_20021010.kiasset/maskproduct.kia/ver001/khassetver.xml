@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<KRMPAssetVersion>
+
+  <name>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/maskproduct.kia?version=1</name>
+
+  <type>Imagery</type>
+
+  <subtype>KRMP</subtype>
+
+  <version>1</version>
+
+  <state>Succeeded</state>
+
+  <progress>1</progress>
+
+  <locked>0</locked>
+
+  <inputs>
+    <input>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia?version=1</input>
+    <input>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/maskgen.kia?version=1</input>
+  </inputs>
+
+  <children/>
+
+  <parents>
+    <parent>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia?version=1</parent>
+  </parents>
+
+  <listeners/>
+
+  <outfiles>
+    <outfile>/opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/maskproduct.kia/ver001/mask.kmp</outfile>
+  </outfiles>
+
+  <meta>
+    <item key="createdtime">2020-06-17 19:59:08</item>
+  </meta>
+
+  <beginTime>1592423996</beginTime>
+
+  <progressTime>1592423998</progressTime>
+
+  <endTime>1592423998</endTime>
+
+  <taskid>0</taskid>
+
+  <config>
+    <overridesrs></overridesrs>
+    <useMercatorProjection>0</useMercatorProjection>
+  </config>
+
+</KRMPAssetVersion>

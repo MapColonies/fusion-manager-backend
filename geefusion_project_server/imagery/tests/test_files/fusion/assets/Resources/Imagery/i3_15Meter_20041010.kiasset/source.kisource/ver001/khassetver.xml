@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<SourceAssetVersion>
+
+  <name>Resources/Imagery/i3_15Meter_20041010.kiasset/source.kisource?version=1</name>
+
+  <type>Imagery</type>
+
+  <subtype>Source</subtype>
+
+  <version>1</version>
+
+  <state>Succeeded</state>
+
+  <progress>1</progress>
+
+  <locked>0</locked>
+
+  <inputs/>
+
+  <children/>
+
+  <parents/>
+
+  <listeners>
+    <listener>Resources/Imagery/i3_15Meter_20041010.kiasset?version=1</listener>
+    <listener>Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia?version=1</listener>
+    <listener>Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia?version=1</listener>
+    <listener>Resources/Imagery/i3_15Meter_20041010.kiasset?version=2</listener>
+  </listeners>
+
+  <outfiles>
+    <outfile>/opt/google/share/tutorials/fusion/src/Imagery/i3SF15-meter.tif</outfile>
+  </outfiles>
+
+  <meta>
+    <item key="createdtime">2020-06-17 19:58:36</item>
+  </meta>
+
+  <beginTime>0</beginTime>
+
+  <progressTime>0</progressTime>
+
+  <endTime>0</endTime>
+
+  <taskid>0</taskid>
+
+  <config>
+    <sources>
+      <source>
+        <uri>khfile://src/Imagery/i3SF15-meter.tif</uri>
+        <size>18024324</size>
+        <mtime>1490904554</mtime>
+      </source>
+    </sources>
+  </config>
+
+</SourceAssetVersion>

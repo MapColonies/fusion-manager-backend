@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<MapLayerJSAssetVersion>
+
+  <name>Projects/Imagery/SFBayArea.kiproject/layerjs.kva?version=1</name>
+
+  <type>Vector</type>
+
+  <subtype>MapLayerJS</subtype>
+
+  <version>1</version>
+
+  <state>Succeeded</state>
+
+  <progress>1</progress>
+
+  <locked>0</locked>
+
+  <inputs/>
+
+  <children/>
+
+  <parents>
+    <parent>Projects/Imagery/SFBayArea.kiproject?version=1</parent>
+  </parents>
+
+  <listeners/>
+
+  <outfiles>
+    <outfile>/opt/google/share/tutorials/fusion/assets/Projects/Imagery/SFBayArea.kiproject/layerjs.kva/ver001/layerjs</outfile>
+  </outfiles>
+
+  <meta>
+    <item key="createdtime">2020-06-17 20:01:20</item>
+  </meta>
+
+  <beginTime>1592424096</beginTime>
+
+  <progressTime>1592424096</progressTime>
+
+  <endTime>1592424096</endTime>
+
+  <taskid>0</taskid>
+
+  <config>
+    <layers>
+      <layer>
+        <type>Imagery</type>
+        <projection>FlatProjection</projection>
+        <channel_id>1000</channel_id>
+        <index_version>1</index_version>
+        <legend>
+          <defaultLocale>
+            <name useDefault="0">Imagery</name>
+            <isChecked useDefault="0">1</isChecked>
+            <desc useDefault="0"></desc>
+            <lookAt useDefault="0"></lookAt>
+            <icon useDefault="0">
+              <type>Internal</type>
+              <href>773</href>
+            </icon>
+          </defaultLocale>
+          <locales/>
+        </legend>
+      </layer>
+    </layers>
+  </config>
+
+</MapLayerJSAssetVersion>

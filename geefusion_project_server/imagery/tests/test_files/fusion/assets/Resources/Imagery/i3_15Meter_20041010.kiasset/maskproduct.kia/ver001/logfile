@@ -1,0 +1,35 @@
+BUILD HOST: shimon-Inspiron-3537
+FUSION VERSION 5.3.5, BUILD 2020-06-02
+STARTTIME: 2020-06-17 19:59:10
+
+COMMAND: gerasterimport --alphamask /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/maskgen.kia/ver001/mask.tif --dataproduct /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia/ver001/raster.kip -o /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/maskproduct.kia/ver001/mask.kmp
+---------- Start Command Output ----------
+Input File Sizes
+  6.0 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/maskgen.kia/ver001/mask.tif
+  6.0 MB : TOTAL Input File Sizes
+Total tiles to process: 32
+Fusion Notice:	Simple read from source
+Completed 100% (32/32) - tiles/sec: 66.53 - time left: 00:00:00 [CPU: 0 Mem: 245 MB PF: 0]
+Processed 32 tiles
+Total time to process: 00:00:00
+Average tiles per second: 66.53
+Fusion Notice:	Closing file /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/maskproduct.kia/ver001/mask.kmp/opacity.
+Fusion Notice:	Copying created file: /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/maskproduct.kia/ver001/mask.kmp/opacity
+Output File Sizes
+  96.2 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/maskproduct.kia/ver001/mask.kmp
+  5.3 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia/ver001/raster.kip
+  5.4 MB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+          3.12 real time
+          0.50 user time
+          0.02 system time
+           17% CPU usage average
+             0 swaps
+             0 page faults
+            30 I/O context switches
+Peak memory used for this job: 267724 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 19:59:13
+ELAPSEDTIME: 3 seconds
+COMPLETED SUCCESSFULLY

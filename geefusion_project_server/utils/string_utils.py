@@ -1,4 +1,4 @@
-def cd_path_n_times(path, n):
+def cd_path_n_times(path, n=1):
 
     result = path
     for i in range(n):

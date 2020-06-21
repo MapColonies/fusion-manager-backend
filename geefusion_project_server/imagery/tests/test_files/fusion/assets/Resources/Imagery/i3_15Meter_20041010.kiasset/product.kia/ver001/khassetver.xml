@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<KRPAssetVersion>
+
+  <name>Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia?version=1</name>
+
+  <type>Imagery</type>
+
+  <subtype>KRP</subtype>
+
+  <version>1</version>
+
+  <state>Succeeded</state>
+
+  <progress>1</progress>
+
+  <locked>0</locked>
+
+  <inputs>
+    <input>Resources/Imagery/i3_15Meter_20041010.kiasset/source.kisource?version=1</input>
+  </inputs>
+
+  <children/>
+
+  <parents>
+    <parent>Resources/Imagery/i3_15Meter_20041010.kiasset/CombinedRP.kia?version=1</parent>
+  </parents>
+
+  <listeners>
+    <listener>Resources/Imagery/i3_15Meter_20041010.kiasset/maskgen.kia?version=1</listener>
+    <listener>Resources/Imagery/i3_15Meter_20041010.kiasset/maskproduct.kia?version=1</listener>
+  </listeners>
+
+  <outfiles>
+    <outfile>/opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia/ver001/raster.kip</outfile>
+  </outfiles>
+
+  <meta>
+    <item key="createdtime">2020-06-17 19:59:06</item>
+  </meta>
+
+  <beginTime>1592423946</beginTime>
+
+  <progressTime>1592423950</progressTime>
+
+  <endTime>1592423950</endTime>
+
+  <taskid>0</taskid>
+
+  <config>
+    <scale>1</scale>
+    <clampNonnegative>0</clampNonnegative>
+    <overridesrs></overridesrs>
+    <useMercatorProjection>0</useMercatorProjection>
+    <north_boundary>90</north_boundary>
+    <south_boundary>-90</south_boundary>
+    <east_boundary>180</east_boundary>
+    <west_boundary>-180</west_boundary>
+  </config>
+
+</KRPAssetVersion>

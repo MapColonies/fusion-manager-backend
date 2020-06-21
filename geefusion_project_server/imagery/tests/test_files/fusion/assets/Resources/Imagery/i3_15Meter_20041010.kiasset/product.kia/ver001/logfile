@@ -1,0 +1,75 @@
+BUILD HOST: shimon-Inspiron-3537
+FUSION VERSION 5.3.5, BUILD 2020-06-02
+STARTTIME: 2020-06-17 19:59:06
+
+COMMAND: gerasterimport --imagery /opt/google/share/tutorials/fusion/src/Imagery/i3SF15-meter.tif -o /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia/ver001/raster.kip --north_boundary 90 --south_boundary -90 --east_boundary 180 --west_boundary -180
+---------- Start Command Output ----------
+Input File Sizes
+  18.0 MB : /opt/google/share/tutorials/fusion/src/Imagery/i3SF15-meter.tif
+  18.0 MB : TOTAL Input File Sizes
+Total tiles to process: 32
+Fusion Notice:	Simple read from source
+Completed  50% (16/32) - tiles/sec: 15.76 - time left: 00:00:01 [CPU: 45 Mem: 293 MB PF: 0]
+Completed  97% (31/32) - tiles/sec: 21.17 - time left: 00:00:00 [CPU: 89 Mem: 304 MB PF: 0]
+Completed 100% (32/32) - tiles/sec: 21.15 - time left: 00:00:00 [CPU: 94 Mem: 257 MB PF: 0]
+Processed 32 tiles
+Total time to process: 00:00:02
+Average tiles per second: 21.15
+Output File Sizes
+  5.3 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia/ver001/raster.kip
+  5.3 MB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+          3.50 real time
+          0.90 user time
+          0.08 system time
+           27% CPU usage average
+             0 swaps
+             0 page faults
+           258 I/O context switches
+Peak memory used for this job: 313200 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 19:59:10
+ELAPSEDTIME: 4 seconds
+COMPLETED SUCCESSFULLY
+
+COMMAND: gemaskgen --oformat=PNG --preview --maxsize=1024 /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia/ver001/raster.kip /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia/ver001/preview.png
+---------- Start Command Output ----------
+Input File Sizes
+  5.3 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia/ver001/raster.kip
+  5.3 MB : TOTAL Input File Sizes
+Fusion Notice:	raster type: Imagery
+Fusion Notice:	num components: 3
+Fusion Notice:	component size: 1
+Fusion Notice:	component type: UInt8
+Fusion Notice:	min, max product levels: 8, 22
+Fusion Notice:	image size at max product level, pixels: (wh) 2000, 3000
+Fusion Notice:	Mask parameters:
+Fusion Notice:	band selection: 1
+Fusion Notice:	automatic level selection for generating mask: 20
+Fusion Notice:	output image offset, pixels: (xy) 480, 1021
+Fusion Notice:	output image size, pixels: (wh) 500, 750
+Fusion Notice:	adjusted feather size: 0
+Fusion Notice:	adjusted hole size: 0
+Fusion Notice:	Flood filling image in memory
+Flooded 1 tiles (1000.0/sec) in 00:00:00
+Fusion Notice:	Writing imagery preview /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia/ver001/preview.png
+Output File Sizes
+  845.5 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/i3_15Meter_20041010.kiasset/product.kia/ver001/preview.png
+  845.5 KB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+          0.37 real time
+          0.32 user time
+          0.01 system time
+           88% CPU usage average
+             0 swaps
+             0 page faults
+             4 I/O context switches
+Peak memory used for this job: 240244 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 19:59:10
+ELAPSEDTIME: 0 seconds
+COMPLETED SUCCESSFULLY
+
+TOTAL ELAPSEDTIME: 4 seconds

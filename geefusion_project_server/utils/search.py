@@ -82,7 +82,6 @@ def get_directory_in_directory_tree(root_directory, name, extension):
 def __get_all_in_directory_tree__(root_directory, extension, check_for_versions):
 
     wanted_directories = []
-    print(root_directory)
 
     for root, dirs, files in os.walk(root_directory, topdown=True):
 

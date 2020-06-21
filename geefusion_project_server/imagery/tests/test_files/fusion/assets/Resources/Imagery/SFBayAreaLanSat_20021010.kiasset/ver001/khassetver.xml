@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<RasterProductAssetVersion>
+
+  <name>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset?version=1</name>
+
+  <type>Imagery</type>
+
+  <subtype>Product</subtype>
+
+  <version>1</version>
+
+  <state>Succeeded</state>
+
+  <progress>0</progress>
+
+  <locked>0</locked>
+
+  <inputs>
+    <input>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/source.kisource?version=1</input>
+  </inputs>
+
+  <children>
+    <children_element>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/CombinedRP.kia?version=1</children_element>
+  </children>
+
+  <parents/>
+
+  <listeners>
+    <listener>Projects/Imagery/SFBayArea.kiproject?version=1</listener>
+  </listeners>
+
+  <outfiles/>
+
+  <meta>
+    <item key="createdtime">2020-06-17 19:59:08</item>
+    <item key="extents">38.464679718017578,36.454353332519531,-120.71331024169922,-123.53061676025391</item>
+    <item key="maxlevel">21</item>
+    <item key="minlevel">8</item>
+    <item key="preview">Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia/ver001/preview.png</item>
+    <item key="sourcedate">2020-06-17T00:00:00Z</item>
+  </meta>
+
+  <beginTime>0</beginTime>
+
+  <progressTime>0</progressTime>
+
+  <endTime>0</endTime>
+
+  <taskid>0</taskid>
+
+  <config>
+    <fill></fill>
+    <srs></srs>
+    <clampNonnegative>0</clampNonnegative>
+    <maskgenConfig>
+      <feather>100</feather>
+      <mode>Mask</mode>
+      <band>1</band>
+      <fillvalue>-1</fillvalue>
+      <threshold>0</threshold>
+      <holesize>0</holesize>
+      <whitefill>0</whitefill>
+      <nodata></nodata>
+    </maskgenConfig>
+    <fuid_resource>1003</fuid_resource>
+    <provider_id>1</provider_id>
+  </config>
+
+</RasterProductAssetVersion>

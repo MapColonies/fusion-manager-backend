@@ -1,0 +1,90 @@
+BUILD HOST: shimon-Inspiron-3537
+FUSION VERSION 5.3.5, BUILD 2020-06-02
+STARTTIME: 2020-06-17 19:59:08
+
+COMMAND: gerasterimport --imagery /opt/google/share/tutorials/fusion/src/Imagery/usgsLanSat.tif -o /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia/ver001/raster.kip --north_boundary 90 --south_boundary -90 --east_boundary 180 --west_boundary -180
+---------- Start Command Output ----------
+Input File Sizes
+  53.1 MB : /opt/google/share/tutorials/fusion/src/Imagery/usgsLanSat.tif
+  53.1 MB : TOTAL Input File Sizes
+Total tiles to process: 309
+Fusion Notice:	Reprojecting source using Cubic
+Fusion Notice:	Approximating transform ...
+Completed   7% (23/309) - tiles/sec: 10.29 - time left: 00:00:28 [CPU: 75 Mem: 284 MB PF: 0]
+Completed  14% (43/309) - tiles/sec: 7.86 - time left: 00:00:34 [CPU: 59 Mem: 321 MB PF: 0]
+Completed  20% (62/309) - tiles/sec: 6.82 - time left: 00:00:36 [CPU: 72 Mem: 355 MB PF: 0]
+Completed  26% (81/309) - tiles/sec: 6.52 - time left: 00:00:35 [CPU: 66 Mem: 390 MB PF: 0]
+Completed  32% (98/309) - tiles/sec: 5.63 - time left: 00:00:37 [CPU: 65 Mem: 424 MB PF: 7]
+Completed  37% (115/309) - tiles/sec: 5.87 - time left: 00:00:33 [CPU: 70 Mem: 424 MB PF: 7]
+Completed  43% (132/309) - tiles/sec: 5.48 - time left: 00:00:32 [CPU: 75 Mem: 424 MB PF: 7]
+Completed  48% (149/309) - tiles/sec: 5.62 - time left: 00:00:28 [CPU: 74 Mem: 424 MB PF: 7]
+Completed  54% (166/309) - tiles/sec: 5.80 - time left: 00:00:25 [CPU: 79 Mem: 424 MB PF: 7]
+Completed  59% (183/309) - tiles/sec: 5.85 - time left: 00:00:22 [CPU: 80 Mem: 425 MB PF: 7]
+Completed  65% (202/309) - tiles/sec: 6.76 - time left: 00:00:16 [CPU: 81 Mem: 458 MB PF: 7]
+Completed  72% (221/309) - tiles/sec: 6.64 - time left: 00:00:13 [CPU: 82 Mem: 471 MB PF: 14]
+Completed  78% (240/309) - tiles/sec: 6.88 - time left: 00:00:10 [CPU: 84 Mem: 471 MB PF: 14]
+Completed  84% (259/309) - tiles/sec: 6.98 - time left: 00:00:07 [CPU: 85 Mem: 471 MB PF: 14]
+Completed  91% (280/309) - tiles/sec: 7.77 - time left: 00:00:04 [CPU: 85 Mem: 471 MB PF: 14]
+Completed  96% (296/309) - tiles/sec: 8.75 - time left: 00:00:01 [CPU: 85 Mem: 471 MB PF: 14]
+Completed 100% (309/309) - tiles/sec: 10.36 - time left: 00:00:00 [CPU: 86 Mem: 434 MB PF: 14]
+Processed 309 tiles
+Total time to process: 00:00:43
+Average tiles per second: 7.16
+Output File Sizes
+  126.5 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia/ver001/raster.kip
+  126.5 MB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+         47.06 real time
+         36.81 user time
+          0.53 system time
+           79% CPU usage average
+             0 swaps
+            14 page faults
+           275 I/O context switches
+Peak memory used for this job: 491296 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 19:59:55
+ELAPSEDTIME: 47 seconds
+COMPLETED SUCCESSFULLY
+
+COMMAND: gemaskgen --oformat=PNG --preview --maxsize=1024 /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia/ver001/raster.kip /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia/ver001/preview.png
+---------- Start Command Output ----------
+Input File Sizes
+  126.5 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia/ver001/raster.kip
+  126.5 MB : TOTAL Input File Sizes
+Fusion Notice:	raster type: Imagery
+Fusion Notice:	num components: 3
+Fusion Notice:	component size: 1
+Fusion Notice:	component type: UInt8
+Fusion Notice:	min, max product levels: 8, 21
+Fusion Notice:	image size at max product level, pixels: (wh) 16412, 11711
+Fusion Notice:	Mask parameters:
+Fusion Notice:	band selection: 1
+Fusion Notice:	automatic level selection for generating mask: 16
+Fusion Notice:	output image offset, pixels: (xy) 40, 492
+Fusion Notice:	output image size, pixels: (wh) 513, 366
+Fusion Notice:	adjusted feather size: 0
+Fusion Notice:	adjusted hole size: 0
+Fusion Notice:	Flood filling image in memory
+Flooded 1 tiles (1000.0/sec) in 00:00:00
+Fusion Notice:	Writing imagery preview /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia/ver001/preview.png
+Output File Sizes
+  267.6 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/SFBayAreaLanSat_20021010.kiasset/product.kia/ver001/preview.png
+  267.6 KB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+          0.11 real time
+          0.09 user time
+          0.00 system time
+           88% CPU usage average
+             0 swaps
+             2 page faults
+             5 I/O context switches
+Peak memory used for this job: 236532 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 19:59:55
+ELAPSEDTIME: 0 seconds
+COMPLETED SUCCESSFULLY
+
+TOTAL ELAPSEDTIME: 47 seconds

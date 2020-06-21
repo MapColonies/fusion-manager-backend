@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<RasterProjectAsset>
+
+  <name>Projects/Imagery/SFBayArea.kiproject</name>
+
+  <type>Imagery</type>
+
+  <subtype>Project</subtype>
+
+  <inputs>
+    <input>Resources/Imagery/BlueMarble.kiasset</input>
+    <input>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset</input>
+    <input>Resources/Imagery/i3_15Meter_20041010.kiasset</input>
+    <input>Resources/Imagery/SFHighResInset_20061010.kiasset</input>
+  </inputs>
+
+  <meta/>
+
+  <versions>
+    <version>Projects/Imagery/SFBayArea.kiproject?version=1</version>
+  </versions>
+
+  <config idl_version="1">
+    <indexVersion>2</indexVersion>
+    <insets>
+      <inset>
+        <dataAsset>Resources/Imagery/BlueMarble.kiasset</dataAsset>
+        <maxlevel>14</maxlevel>
+        <overridemax>0</overridemax>
+      </inset>
+      <inset>
+        <dataAsset>Resources/Imagery/SFBayAreaLanSat_20021010.kiasset</dataAsset>
+        <maxlevel>21</maxlevel>
+        <overridemax>0</overridemax>
+      </inset>
+      <inset>
+        <dataAsset>Resources/Imagery/i3_15Meter_20041010.kiasset</dataAsset>
+        <maxlevel>22</maxlevel>
+        <overridemax>0</overridemax>
+      </inset>
+      <inset>
+        <dataAsset>Resources/Imagery/SFHighResInset_20061010.kiasset</dataAsset>
+        <maxlevel>26</maxlevel>
+        <overridemax>0</overridemax>
+      </inset>
+    </insets>
+    <legend>
+      <defaultLocale>
+        <name useDefault="0">Imagery</name>
+        <isChecked useDefault="0">1</isChecked>
+        <desc useDefault="0"></desc>
+        <lookAt useDefault="0"></lookAt>
+        <icon useDefault="0">
+          <type>Internal</type>
+          <href>773</href>
+        </icon>
+      </defaultLocale>
+      <locales/>
+    </legend>
+    <fuid_channel>1000</fuid_channel>
+    <asset_uuid>3a7600c8-b0d5-11ea-acb8-8f0b6ace24f2</asset_uuid>
+    <is_timemachine_project>0</is_timemachine_project>
+    <is_overlay_terrain_project>0</is_overlay_terrain_project>
+    <overlay_terrain_resources_min_level>12</overlay_terrain_resources_min_level>
+    <overlay_terrain_start_level>4</overlay_terrain_start_level>
+  </config>
+
+</RasterProjectAsset>

@@ -1,0 +1,88 @@
+BUILD HOST: shimon-Inspiron-3537
+FUSION VERSION 5.3.5, BUILD 2020-06-02
+STARTTIME: 2020-06-17 19:57:15
+
+COMMAND: gerasterimport --imagery /opt/google/share/tutorials/fusion/src/Imagery/bluemarble_4km.tif -o /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/product.kia/ver001/raster.kip --north_boundary 90 --south_boundary -90 --east_boundary 180 --west_boundary -180
+---------- Start Command Output ----------
+Input File Sizes
+  23.9 MB : /opt/google/share/tutorials/fusion/src/Imagery/bluemarble_4km.tif
+  23.9 MB : TOTAL Input File Sizes
+Total tiles to process: 175
+Fusion Notice:	Reprojecting source using Cubic
+Fusion Notice:	Approximating transform ...
+Completed   6% (11/175) - tiles/sec: 6.03 - time left: 00:00:27 [CPU: 93 Mem: 315 MB PF: 0]
+Completed  13% (23/175) - tiles/sec: 6.63 - time left: 00:00:23 [CPU: 116 Mem: 337 MB PF: 0]
+Completed  20% (35/175) - tiles/sec: 6.59 - time left: 00:00:21 [CPU: 106 Mem: 337 MB PF: 0]
+Completed  27% (47/175) - tiles/sec: 6.82 - time left: 00:00:19 [CPU: 98 Mem: 338 MB PF: 0]
+Completed  34% (59/175) - tiles/sec: 6.92 - time left: 00:00:17 [CPU: 106 Mem: 338 MB PF: 0]
+Completed  41% (72/175) - tiles/sec: 6.99 - time left: 00:00:15 [CPU: 103 Mem: 338 MB PF: 0]
+Completed  49% (86/175) - tiles/sec: 7.27 - time left: 00:00:12 [CPU: 101 Mem: 338 MB PF: 0]
+Completed  57% (99/175) - tiles/sec: 6.55 - time left: 00:00:12 [CPU: 100 Mem: 421 MB PF: 0]
+Completed  63% (111/175) - tiles/sec: 6.55 - time left: 00:00:10 [CPU: 99 Mem: 423 MB PF: 0]
+Completed  70% (123/175) - tiles/sec: 6.16 - time left: 00:00:08 [CPU: 101 Mem: 423 MB PF: 0]
+Completed  76% (133/175) - tiles/sec: 5.98 - time left: 00:00:07 [CPU: 99 Mem: 423 MB PF: 0]
+Completed  82% (143/175) - tiles/sec: 5.81 - time left: 00:00:06 [CPU: 102 Mem: 423 MB PF: 0]
+Completed  87% (153/175) - tiles/sec: 5.70 - time left: 00:00:04 [CPU: 99 Mem: 423 MB PF: 0]
+Completed  94% (165/175) - tiles/sec: 6.29 - time left: 00:00:02 [CPU: 101 Mem: 423 MB PF: 0]
+Completed 100% (175/175) - tiles/sec: 6.71 - time left: 00:00:00 [CPU: 101 Mem: 399 MB PF: 0]
+Processed 175 tiles
+Total time to process: 00:00:26
+Average tiles per second: 6.61
+Output File Sizes
+  48.7 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/product.kia/ver001/raster.kip
+  48.7 MB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+         28.30 real time
+         26.19 user time
+          0.35 system time
+           93% CPU usage average
+             0 swaps
+             0 page faults
+          1637 I/O context switches
+Peak memory used for this job: 433948 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 19:57:44
+ELAPSEDTIME: 29 seconds
+COMPLETED SUCCESSFULLY
+
+COMMAND: gemaskgen --oformat=PNG --preview --maxsize=1024 /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/product.kia/ver001/raster.kip /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/product.kia/ver001/preview.png
+---------- Start Command Output ----------
+Input File Sizes
+  48.7 MB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/product.kia/ver001/raster.kip
+  48.7 MB : TOTAL Input File Sizes
+Fusion Notice:	raster type: Imagery
+Fusion Notice:	num components: 3
+Fusion Notice:	component size: 1
+Fusion Notice:	component type: UInt8
+Fusion Notice:	min, max product levels: 8, 14
+Fusion Notice:	image size at max product level, pixels: (wh) 16384, 8192
+Fusion Notice:	Mask parameters:
+Fusion Notice:	band selection: 1
+Fusion Notice:	automatic level selection for generating mask: 10
+Fusion Notice:	output image offset, pixels: (xy) 0, 256
+Fusion Notice:	output image size, pixels: (wh) 1024, 512
+Fusion Notice:	adjusted feather size: 0
+Fusion Notice:	adjusted hole size: 0
+Fusion Notice:	Flood filling image in memory
+Flooded 1 tiles (1000.0/sec) in 00:00:00
+Fusion Notice:	Writing imagery preview /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/product.kia/ver001/preview.png
+Output File Sizes
+  761.8 KB : /opt/google/share/tutorials/fusion/assets/Resources/Imagery/BlueMarble.kiasset/product.kia/ver001/preview.png
+  761.8 KB : TOTAL Output File Sizes
+----------------------------- ----------
+Process Stats
+          0.33 real time
+          0.32 user time
+          0.01 system time
+          100% CPU usage average
+             0 swaps
+             0 page faults
+             3 I/O context switches
+Peak memory used for this job: 237588 kB
+---------- End Command Output ----------
+ENDTIME: 2020-06-17 19:57:44
+ELAPSEDTIME: 0 seconds
+COMPLETED SUCCESSFULLY
+
+TOTAL ELAPSEDTIME: 29 seconds
