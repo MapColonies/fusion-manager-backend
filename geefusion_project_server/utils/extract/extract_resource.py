@@ -6,7 +6,8 @@ from utils.xmlconverter import XMLConverter
 from utils.search import exists_with_version, get_version_xml, get_directory_in_directory_tree, get_versions
 from django.core.files.base import ContentFile
 from config.gee_paths import get_assets_path, get_imagery_resources_path
-from config.extensions import get_resource_extension
+from utils.constants.extensions import get_resource_extension
+from utils.constants.date import default_date
 from utils.string_utils import cd_path_n_times, get_path_suffix, get_file_name_from_path
 from utils.model_utils import get_path
 
@@ -101,7 +102,7 @@ def __get_metadata__(xml_path, json):
     # Check that creation date is valid
     date_taken = metadata[-1]
     resource_name = get_file_name_from_path(json["name"])
-    if date_taken == '0000-00-00T00:00:00Z':
+    if date_taken == default_date():
         return [None, f"Resource date is invalid, please modify the following resource's date: {resource_name}"]
     
     # Read metadata

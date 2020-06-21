@@ -5,7 +5,7 @@ from .extract_resource import get_resource
 from utils.xmlconverter import XMLConverter
 from utils.search import exists_with_version, get_versions, get_version_xml, get_directory_in_directory_tree, get_main_xml
 from config.gee_paths import get_assets_path, get_imagery_projects_path
-from config.extensions import get_project_extension
+from utils.constants.extensions import get_project_extension
 from utils.model_utils import get_path
 from utils.string_utils import get_path_suffix
 

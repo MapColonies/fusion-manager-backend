@@ -10,7 +10,7 @@ from utils.extract.extract_project import get_project_by_name, get_project_versi
 from utils.extract.extract_resource import get_resource, get_resource_by_name, get_resource_versions
 from utils.search import get_all_projects_in_directory_tree, get_all_resources_in_directory_tree
 from config.gee_paths import get_imagery_projects_path, get_imagery_resources_path
-from config.extensions import get_project_extension
+from utils.constants.extensions import get_project_extension
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view

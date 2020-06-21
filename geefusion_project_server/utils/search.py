@@ -1,8 +1,8 @@
 import os
 import subprocess
-from config.extensions import get_project_extension, get_resource_extension
+from utils.constants.extensions import get_project_extension, get_resource_extension
+from utils.constants.filenames import get_main_xml_name, get_version_xml_name
 from .xmlconverter import XMLConverter
-from config.filenames import get_main_xml_name, get_version_xml_name
 
 def exists_with_version(path, version):
 
