@@ -68,6 +68,17 @@ def get_resource_by_name(name, version='latest'):
     return get_resource(path, version, name=name)
 
 
+def get_resource_image(name, version):
+    query_set = Resource.objects.filter(name=name, version=version)
+    
+    if len(query_set) > 0:
+        resource = query_set[0]
+        image = resource.thumbnail
+        return [image, '']
+    
+    return [None, 'Image not found']
+
+
 def __get_latest_version__(path):
     versions = get_versions(path)
     # If the resource has no versions
@@ -155,9 +166,9 @@ def __get_preview__(xml_path, metadata):
 
     # Read thumbnail
     with open(preview_path, 'rb') as file:
-        thumbnail = [metadata[-2], ContentFile(file.read())]
+        data = ContentFile(file.read())
     
-    return thumbnail
+    return [metadata[-2], data]
 
 
 def get_resource_versions(name):
