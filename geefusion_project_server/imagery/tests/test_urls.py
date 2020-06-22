@@ -12,7 +12,6 @@ class TestUrls(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.test_files_path = '/'.join([os.path.dirname(os.path.abspath(__file__)), 'test_files', 'fusion'])
 
 
     def test_resources(self):
