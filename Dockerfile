@@ -39,7 +39,7 @@ RUN pip install Pillow xmljson xmltodict dj_database_url psycopg2-binary uwsgi w
 #USER myuser
 
 # Copy source files
-COPY ../geefusion_project_server /opt/myapp/geefusion_project_server
+COPY geefusion_project_server /opt/myapp/geefusion_project_server
 
 FROM alpine
 COPY --from=base / /
