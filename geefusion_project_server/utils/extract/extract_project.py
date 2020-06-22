@@ -7,7 +7,7 @@ from utils.search import exists_with_version, get_versions, get_version_xml, get
 from config.gee_paths import get_assets_path, get_imagery_projects_path
 from utils.constants.extensions import get_project_extension
 from utils.model_utils import get_path
-from utils.string_utils import get_path_suffix
+from utils.path_utils import get_path_suffix
 
 ASSETS_PATH = get_assets_path()
 IMAGERY_PROJECT_PATH = get_imagery_projects_path()
@@ -42,8 +42,9 @@ def get_project(path, name, version):
 
 
 def get_project_by_name(name, version='latest'):
-    extension = get_project_extension()
-    path = get_directory_in_directory_tree(IMAGERY_PROJECT_PATH, name, extension)
+    # extension = get_project_extension()
+    # path = get_directory_in_directory_tree(IMAGERY_PROJECT_PATH, name, extension)
+    path = get_path(Project, name)
     
     if not path:
         return [None, 'No such project']
@@ -59,6 +60,17 @@ def get_project_by_name(name, version='latest'):
 def get_project_versions(name):
     path = get_path(Project, name)
     return get_versions(path)
+
+
+# def __get_project_path__(name):
+
+#     # Check if resource exists in DB
+#     query_set = Project.objects.filter(name=name)
+
+#     # If a project with given name exists
+#     if len(query_set) > 0:
+#         project = query_set[0]
+#         return [project, '']
 
 
 def __get_project_resources__(xml_path):

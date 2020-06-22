@@ -8,7 +8,7 @@ from django.core.files.base import ContentFile
 from config.gee_paths import get_assets_path, get_imagery_resources_path
 from utils.constants.extensions import get_resource_extension
 from utils.constants.date import default_date
-from utils.string_utils import cd_path_n_times, get_path_suffix, get_file_name_from_path
+from utils.path_utils import cd_path_n_times, get_path_suffix, get_file_name_from_path, exists_in_staticfiles
 from utils.model_utils import get_path
 
 ASSETS_PATH = get_assets_path()
@@ -52,16 +52,35 @@ def get_resource(path, version, name=None):
 
     # Create resource object
     resource = Resource(name=name, version=version, path=path, extent=extent, takenAt=creation_date, level=level, resolution=resolution, mask=mask)
-    # Save thumbnail
-    resource.thumbnail.save(thumbnail[0], thumbnail[1])
+    
+    # Save resource thumbnail
+    __save_resource_thumbnail__(resource, thumbnail)
+    
     # Save resource
     resource.save()
     return [resource, mask, '']
 
 
+def __save_resource_thumbnail__(resource, thumbnail):
+    thumbnail_original_path = thumbnail[0]
+    thumbnail_resource_version = get_path_suffix(cd_path_n_times(thumbnail_original_path))
+    thumbnail_data = thumbnail[1]
+    thumbnail_path = f'Resources/Imagery/{resource.name}/{thumbnail_resource_version}/preview.png'
+
+    # Check if thumbnail already exists
+    if not exists_in_staticfiles(thumbnail_path):
+        # Save thumbnail
+        resource.thumbnail.save(thumbnail_path, thumbnail_data)
+    else:
+        # Reference existing thumbnail
+        resource.thumbnail.name = 'static/' + thumbnail_path
+
+
 def get_resource_by_name(name, version='latest'):
-    extension = get_resource_extension()
-    path = get_directory_in_directory_tree(RESOURCE_PATH, name, extension)
+    # extension = get_resource_extension()
+    # path = get_directory_in_directory_tree(RESOURCE_PATH, name, extension)
+    path = get_path(Resource, name)
+
     if path == None:
         return [None, None, 'No such resource']
     
