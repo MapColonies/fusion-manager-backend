@@ -28,7 +28,7 @@ RUN apt-get update &&\
 RUN python3.7 -m pip install --upgrade --force pip
 
 # Install django
-RUN pip install django djangorestframework
+RUN pip install django djangorestframework django-cors-headers
 
 RUN pip install setuptools
 

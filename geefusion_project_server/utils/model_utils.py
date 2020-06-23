@@ -21,4 +21,5 @@ def get_path(model, name):
 
 def __get_path__(model, name):
     query_set = model.objects.filter(name=name)
+    print(len(query_set))
     return query_set[0].path if len(query_set) > 0 else None
