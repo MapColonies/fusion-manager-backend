@@ -15,25 +15,26 @@ class ResourceSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Resource
-        fields = ('name', 'version', 'extent', 'thumbnail', 'takenAt', 'level', 'resolution', 'mask')
+        fields = ('name', 'version', 'extent', 'takenAt', 'level', 'resolution', 'mask')
         depth = 1
     
     def get_mask(self, obj):
         mask = obj.mask
+        return mask_to_json(mask)
 
-        if mask.no_mask:
-            return { 'no_mask': True }
+        # if mask.no_mask:
+        #     return { 'no_mask': True }
         
-        return {
-            'feather': mask.feather,
-            'mode': mask.mode,
-            'band': mask.band,
-            'fill_value': mask.fill_value,
-            'threshold': mask.threshold,
-            'hole_size': mask.hole_size,
-            'white_fill': mask.white_fill,
-            'no_data': mask.no_data
-        }
+        # return {
+        #     'feather': mask.feather,
+        #     'mode': mask.mode,
+        #     'band': mask.band,
+        #     'fill_value': mask.fill_value,
+        #     'threshold': mask.threshold,
+        #     'hole_size': mask.hole_size,
+        #     'white_fill': mask.white_fill,
+        #     'no_data': mask.no_data
+        # }
 
 class ProjectSerializer(serializers.ModelSerializer):
     resources = ResourceSerializer(many=True)
