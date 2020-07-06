@@ -16,7 +16,7 @@ def get_project(path, name, version):
 
     if version != 'latest':
         # Check if resource exists in DB
-        query_set = Project.objects.filter(name=name, version=version)
+        query_set = Project.objects.filter(name=name, version=version, path=path)
 
         if len(query_set) > 0:
             project = query_set[0]
@@ -42,8 +42,6 @@ def get_project(path, name, version):
 
 
 def get_project_by_name(name, version='latest'):
-    # extension = get_project_extension()
-    # path = get_directory_in_directory_tree(IMAGERY_PROJECT_PATH, name, extension)
     path = get_path(Project, name)
     
     if not path:
@@ -62,17 +60,6 @@ def get_project_versions(name):
     return get_versions(path)
 
 
-# def __get_project_path__(name):
-
-#     # Check if resource exists in DB
-#     query_set = Project.objects.filter(name=name)
-
-#     # If a project with given name exists
-#     if len(query_set) > 0:
-#         project = query_set[0]
-#         return [project, '']
-
-
 def __get_project_resources__(xml_path):
     
     # Convert xml to json
@@ -83,7 +70,6 @@ def __get_project_resources__(xml_path):
     
     # Get project resources
     splitted_paths = [ __split_resource_path__(file) for file in resource_paths]
-    #resources = [get_resource(file, version)[0] for file, version in splitted_paths]
     
     resources = []
     for file, version in splitted_paths:

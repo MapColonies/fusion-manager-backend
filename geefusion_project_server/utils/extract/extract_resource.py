@@ -28,7 +28,7 @@ def get_resource(path, version, name=None):
             return [None, None, 'Resource has no versions']
     
     # Check if resource exists in DB
-    query_set = Resource.objects.filter(name=name, version=version)
+    query_set = Resource.objects.filter(name=name, version=version, path=path)
     
     if len(query_set) > 0:
         resource = query_set[0]
@@ -77,8 +77,6 @@ def __save_resource_thumbnail__(resource, thumbnail):
 
 
 def get_resource_by_name(name, version='latest'):
-    # extension = get_resource_extension()
-    # path = get_directory_in_directory_tree(RESOURCE_PATH, name, extension)
     path = get_path(Resource, name)
 
     if path == None:

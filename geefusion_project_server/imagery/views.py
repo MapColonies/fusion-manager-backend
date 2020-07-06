@@ -37,11 +37,14 @@ def resources(request):
 @api_view(['GET'])
 def resource(request):
     
-    resource_name = request.GET.get('name', 'bad')
+    resource_name = request.GET.get('name', '')
+    resource_path = request.GET.get('path', '')
     resource_version = request.GET.get('version', 'latest')
 
-    if resource_name == 'bad':
+    if resource_name == '':
         return Response("Resource name wasn't provided", status=status.HTTP_400_BAD_REQUEST)
+    if resource_path == '':
+        return Response("Resource path wasn't provided", status=status.HTTP_400_BAD_REQUEST)
 
     if resource_version == 'latest':
         resource, mask, error_message = get_resource_by_name(resource_name)
@@ -60,11 +63,14 @@ def resource(request):
 @api_view(['GET'])
 def resource_image(request):
 
-    resource_name = request.GET.get('name', 'bad')
+    resource_name = request.GET.get('name', '')
+    resource_path = request.GET.get('path', '')
     resource_version = request.GET.get('version', '')
 
-    if resource_name == 'bad':
+    if resource_name == '':
         return Response("Resource name wasn't provided", status=status.HTTP_400_BAD_REQUEST)
+    if resource_path == '':
+        return Response("Resource path wasn't provided", status=status.HTTP_400_BAD_REQUEST)
     if resource_version == '':
         return Response("Resource version wasn't provided", status=status.HTTP_400_BAD_REQUEST)
 
@@ -85,11 +91,14 @@ def projects(request):
 
 @api_view(['GET'])
 def project(request):
-    project_name = request.GET.get('name', 'bad')
+    project_name = request.GET.get('name', '')
+    project_path = request.GET.get('path', '')
     project_version = request.GET.get('version', 'latest')
 
-    if project_name == 'bad':
+    if project_name == '':
         return Response("Project name wasn't provided", status=status.HTTP_400_BAD_REQUEST)
+    if project_path == '':
+        return Response("Project path wasn't provided", status=status.HTTP_400_BAD_REQUEST)
 
     if project_version == 'latest':
         project, error_message = get_project_by_name(project_name)
