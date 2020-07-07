@@ -3,26 +3,33 @@ import os
 from imagery.models import Resource, Mask
 from datetime import datetime
 from utils.xmlconverter import XMLConverter
-from utils.search import exists_with_version, get_version_xml, get_directory_in_directory_tree, get_versions
+from utils.search import exists_with_version, get_version_xml, get_versions
 from django.core.files.base import ContentFile
 from config.gee_paths import get_assets_path, get_imagery_resources_path
 from utils.constants.extensions import get_resource_extension
 from utils.constants.date import default_date
-from utils.path_utils import cd_path_n_times, get_path_suffix, get_file_name_from_path, exists_in_staticfiles
-from utils.model_utils import get_path
+from utils.path import cd_path_n_times, get_path_suffix, get_file_name_from_path, exists_in_staticfiles, change_root_dir
+from utils.model import get_latest_version
 
 ASSETS_PATH = get_assets_path()
 RESOURCE_PATH = get_imagery_resources_path()
 
 
-def get_resource(path, version, name=None):
+def get_resource(path, version='latest', name=None):
+
     # Set name if missing
     if name == None:
         name = get_file_name_from_path(path)
+    elif name not in path:
+        path += f'{name}{get_resource_extension()}'
     
+    # Check that the given path is a directory
+    if not os.path.isdir(path):
+        return [None, None, 'Does not exist']
+
     # Set version to latest version if requested
     if version == 'latest':
-        version = __get_latest_version__(path)
+        version = get_latest_version(path)
         # If the resource has no versions
         if version == 0:
             return [None, None, 'Resource has no versions']
@@ -76,17 +83,17 @@ def __save_resource_thumbnail__(resource, thumbnail):
         resource.thumbnail.name = 'static/' + thumbnail_path
 
 
-def get_resource_by_name(name, version='latest'):
-    path = get_path(Resource, name)
+# def get_resource_by_name(name, version='latest'):
+    # path = get_path(Resource, name)
 
-    if path == None:
-        return [None, None, 'No such resource']
+    # if path == None:
+    #     return [None, None, 'No such resource']
     
-    return get_resource(path, version, name=name)
+    # return get_resource(path, version, name=name)
 
 
-def get_resource_image(name, version):
-    query_set = Resource.objects.filter(name=name, version=version)
+def get_resource_image(path, name, version):
+    query_set = Resource.objects.filter(name=name, version=version, path=path)
     
     if len(query_set) > 0:
         resource = query_set[0]
@@ -96,12 +103,12 @@ def get_resource_image(name, version):
     return [None, 'Image not found']
 
 
-def __get_latest_version__(path):
-    versions = get_versions(path)
-    # If the resource has no versions
-    if len(versions) == 0:
-        return 0
-    return max(versions)
+# def __get_latest_version__(path):
+#     versions = get_versions(path)
+#     # If the resource has no versions
+#     if len(versions) == 0:
+#         return 0
+#     return max(versions)
 
 
 def __get_data__(xml_path):
@@ -188,8 +195,7 @@ def __get_preview__(xml_path, metadata):
     return [metadata[-2], data]
 
 
-def get_resource_versions(name):
-    path = get_path(Resource, name)
+def get_resource_versions(path, name):
     return get_versions(path)
 
 

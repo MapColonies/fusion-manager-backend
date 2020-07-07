@@ -1,7 +1,9 @@
 import os
 import subprocess
+from imagery.models import Resource, Project
 from utils.constants.extensions import get_project_extension, get_resource_extension
 from utils.constants.filenames import get_main_xml_name, get_version_xml_name
+from utils.path import change_root_dir
 from .xmlconverter import XMLConverter
 
 def exists_with_version(path, version):
@@ -23,7 +25,7 @@ def exists_with_version(path, version):
 def get_versions(path):
     bash_command = f"find {path} -maxdepth 1 -iname 'ver*'"
     version_directories = [ int(line.decode('utf-8').split('/')[-1].replace("ver", "")) for line in subprocess.check_output(bash_command, shell=True).splitlines() ]
-    
+
     # Get only valid versions
     valid_versions = []
     for version in version_directories:
@@ -56,40 +58,53 @@ def get_version_xml(path, version):
     return xml_list[0].decode("utf-8")
 
 
-def get_all_projects_in_directory_tree(root):
-    extension = get_project_extension()
-    return __get_all_in_directory_tree__(root, extension, False)
+def get_all_in_directory(path, model, model_type):
 
-
-def get_all_resources_in_directory_tree(root):
-    extension = get_resource_extension()
-    return __get_all_in_directory_tree__(root, extension, True)
-
-
-def get_directory_in_directory_tree(root_directory, name, extension):
-
-    full_name = name + extension
-
-    for root, dirs, files in os.walk(root_directory, topdown=True):
-        if full_name in dirs:
-            if not root.endswith('/'): root += '/'
-            return root + full_name
+    if not os.path.isdir(path):
+        path = change_root_dir(path, 'Imagery')
+        return f'The path {path} is not a valid directory.'
     
-    # Not found
-    return None
+    if model == Resource:
+        return __get_directory_content__(path, Resource, model_type, True)
+    
+    return __get_directory_content__(path, Project, model_type, False)
 
 
-def __get_all_in_directory_tree__(root_directory, extension, check_for_versions):
+# def get_all_projects_in_directory_tree(path, model_type):
+#     # return __get_all_in_directory_tree__(root, Project, False)
+#     return __get_directory_content__(path, Project, model_type, False)
 
-    wanted_directories = []
 
-    for root, dirs, files in os.walk(root_directory, topdown=True):
+# def get_all_resources_in_directory_tree(path, model_type):
+#     # return __get_all_in_directory_tree__(root, Resource, True)
+#     return __get_directory_content__(path, Resource, model_type, True)
 
-        # Go over copy of dir list (because changes are made while in loop)
-        dirs_copy = dirs.copy()
 
-        # find wanted directories
-        for dir in dirs_copy:
+# def get_directory_in_directory_tree(root_directory, name, extension):
+
+#     full_name = name + extension
+
+#     for root, dirs, files in os.walk(root_directory, topdown=True):
+#         if full_name in dirs:
+#             if not root.endswith('/'): root += '/'
+#             return root + full_name
+    
+#     # Not found
+#     return None
+
+
+def __get_directory_content__(directory, model, model_type, check_for_versions):
+
+    extension = get_resource_extension() if model == Resource else get_project_extension()
+    if not directory.endswith('/'): directory += '/'
+    model_directories = []
+    sub_directories = []
+
+    # find wanted directories
+    for content in os.listdir(directory):
+
+        if os.path.isdir(directory + content):
+            dir = content
 
             # Check for specific directories
             if dir.endswith(extension):
@@ -97,15 +112,60 @@ def __get_all_in_directory_tree__(root_directory, extension, check_for_versions)
                 # remove extension
                 name = dir[:-len(extension)]
 
-                if not root.endswith('/'): root += '/'
-                full_path = root + dir
-                versions = get_versions(full_path)
+                full_path = directory + dir
+                versions = get_versions(full_path) if check_for_versions else [1]
 
                 # add dir to results if it has existing versions
                 if len(versions) > 0:
-                    wanted_directories.append(name)
-
-                # remove for directory list so walk wouldn't go in
-                dirs.remove(dir)
+                    model_directories.append(name)
+            else:
+                sub_directories.append(dir)
     
-    return wanted_directories
+    res = {
+        'path': change_root_dir(directory, model_type),
+        'directories': sub_directories
+    }
+
+    # Set model directories part of result
+    model_name = 'resources' if model == Resource else 'projects'
+    res[model_name] = model_directories
+
+    return res
+
+
+# def __get_all_in_directory_tree__(root_directory, model, check_for_versions):
+
+#     wanted_directories = []
+#     extension = get_resource_extension() if model == Resource else get_project_extension()
+#     model_root_dir_name = 'Resource' if model == Resource else 'Project'
+
+#     for root, dirs, files in os.walk(root_directory, topdown=True):
+
+#         # Go over copy of dir list (because changes are made while in loop)
+#         dirs_copy = dirs.copy()
+
+#         if not root.endswith('/'): root += '/'
+
+#         # find wanted directories
+#         for dir in dirs_copy:
+
+#             # Check for specific directories
+#             if dir.endswith(extension):
+
+#                 # remove extension
+#                 name = dir[:-len(extension)]
+
+#                 full_path = root + dir
+#                 versions = get_versions(full_path) if check_for_versions else [1]
+
+#                 # add dir to results if it has existing versions
+#                 if len(versions) > 0:
+#                     wanted_directories.append({
+#                         'name': name,
+#                         'path': change_root_dir(full_path, model_root_dir_name)
+#                     })
+
+#                 # remove for directory list so walk wouldn't go in
+#                 dirs.remove(dir)
+    
+#     return wanted_directories

@@ -17,5 +17,9 @@ def get_file_name_from_path(path):
     return path.split("/")[-1].split(".")[0]
 
 
+def change_root_dir(path, parent_dir_name):
+    return path.split(parent_dir_name)[1]
+
+
 def exists_in_staticfiles(path):
     return os.path.isfile(STATIC_ROOT + '/' + path)

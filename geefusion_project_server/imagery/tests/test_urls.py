@@ -22,13 +22,14 @@ class TestUrls(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-        self.assertContains(response, 'BlueMarble')
-        self.assertContains(response, 'SFBayAreaLanSat_20021010')
-        self.assertContains(response, 'SFHighResInset_20061010')
-        self.assertContains(response, 'i3_15Meter_20041010')
+        json_resources = json.loads(response.content)['resources']
+        self.assertIn('BlueMarble', json_resources)
+        self.assertIn('SFBayAreaLanSat_20021010', json_resources)
+        self.assertIn('SFHighResInset_20061010', json_resources)
+        self.assertIn('i3_15Meter_20041010', json_resources)
     
 
-    def test_resource(self):
+    def test_resource_exists(self):
         # Get url
         url = reverse('imagery-resource')
 
@@ -50,6 +51,27 @@ class TestUrls(TestCase):
             json.loads(response.content)['versions'], 
             [2]
         )
+    
+
+    def test_resource_does_not_exist(self):
+        # Get url
+        url = reverse('imagery-resource')
+
+        # Check that url gives correct function
+        self.assertEquals(resolve(url).func, resource)
+
+        # Make request
+        response = self.client.get(url, data={ 
+            'path': 'hello',
+            'name': 'BlueMarble' 
+        })
+        self.assertEqual(response.status_code, 404)
+
+        # Check response message
+        self.assertEquals(
+            json.loads(response.content), 
+            "Does not exist"
+        )
 
 
     def test_projects(self):
@@ -60,7 +82,7 @@ class TestUrls(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-        self.assertContains(response, 'SFBayArea')
+        self.assertIn('SFBayArea', json.loads(response.content)['projects'])
     
     
     def test_project(self):

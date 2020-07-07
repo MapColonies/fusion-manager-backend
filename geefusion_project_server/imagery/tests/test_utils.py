@@ -1,12 +1,13 @@
 import os
 from unittest.mock import patch
 from django.test import TestCase
+from imagery.models import Resource, Project
 from utils.constants.extensions import get_project_extension, get_resource_extension
 from utils.path_utils import get_file_name_from_path, get_path_suffix, cd_path_n_times
 
 FUSION_PATH = '/'.join([os.path.dirname(os.path.abspath(__file__)), 'test_files', 'fusion/'])
 with patch.dict('os.environ', { 'FUSION_PATH': FUSION_PATH }):
-    from utils.search import exists_with_version, get_versions, get_all_projects_in_directory_tree, get_all_resources_in_directory_tree, get_directory_in_directory_tree
+    from utils.search import exists_with_version, get_versions, get_all_in_directory
 
 class TestPathUtils(TestCase):
 
@@ -73,27 +74,27 @@ class TestSearch(TestCase):
         versions = get_versions(self.BlueMarble_resource)
         self.assertEquals(versions, [2])
 
-    def test_get_all_projects_in_directory_tree(self):
-        projects = get_all_projects_in_directory_tree(self.projects_path)
-        self.assertEquals(projects, ['SFBayArea'])
+    def test_get_all_projects_in_directory(self):
+        projects = get_all_in_directory(self.projects_path, Project, 'Imagery')
+        self.assertEquals(projects['projects'], ['SFBayArea'])
     
-    def get_all_resources_in_directory_tree(self):
-        resources = get_all_projects_in_directory_tree(self.projects_path)
-        self.assertCountEqual(resources, ['BlueMarble', 'i3_15Meter_20041010', 'SFBayAreaLanSat_20021010', 'SFHighResInset_20061010'])
+    def get_all_resources_in_directory(self):
+        resources = get_all_in_directory(self.projects_path, Resource, 'Imagery')
+        self.assertCountEqual(resources['resources'], ['BlueMarble', 'i3_15Meter_20041010', 'SFBayAreaLanSat_20021010', 'SFHighResInset_20061010'])
     
-    def test_get_directory_in_directory_tree(self):
+    # def test_get_directory_in_directory_tree(self):
 
-        project_extension = get_project_extension()
-        resource_extension = get_resource_extension()
+    #     project_extension = get_project_extension()
+    #     resource_extension = get_resource_extension()
 
-        directory = get_directory_in_directory_tree(self.projects_path, 'random', project_extension)
-        self.assertEqual(directory, None)
+    #     directory = get_directory_in_directory_tree(self.projects_path, 'random', project_extension)
+    #     self.assertEqual(directory, None)
 
-        directory = get_directory_in_directory_tree(self.projects_path, 'SFBayArea', project_extension)
-        self.assertEqual(directory, self.SFBayArea_project)
+    #     directory = get_directory_in_directory_tree(self.projects_path, 'SFBayArea', project_extension)
+    #     self.assertEqual(directory, self.SFBayArea_project)
 
-        directory = get_directory_in_directory_tree(self.resources_path, 'random', resource_extension)
-        self.assertEqual(directory, None)
+    #     directory = get_directory_in_directory_tree(self.resources_path, 'random', resource_extension)
+    #     self.assertEqual(directory, None)
 
-        directory = get_directory_in_directory_tree(self.resources_path, 'BlueMarble', resource_extension)
-        self.assertEqual(directory, self.BlueMarble_resource)
+    #     directory = get_directory_in_directory_tree(self.resources_path, 'BlueMarble', resource_extension)
+    #     self.assertEqual(directory, self.BlueMarble_resource)

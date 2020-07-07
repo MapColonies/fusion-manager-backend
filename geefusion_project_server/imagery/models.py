@@ -31,7 +31,7 @@ class Resource(models.Model):
         return self.name
 
     class Meta:
-        unique_together = (('name','version'),)
+        unique_together = (('name', 'version', 'path'),)
 
 # Project model.
 # Represents a fusion project.
@@ -46,7 +46,7 @@ class Project(models.Model):
         return self.name
 
     class Meta:
-        unique_together = (('name','version'),)
+        unique_together = (('name', 'version', 'path'),)
 
 # Project - resource relation model.
 # Defines a realtionship between a project and a resource (project has resource).
