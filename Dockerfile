@@ -27,10 +27,10 @@ RUN apt-get update &&\
 # Upgrade pip
 RUN python3.7 -m pip install --upgrade --force pip
 
+RUN pip install setuptools
+
 # Install django
 RUN pip install django djangorestframework django-rest-swagger django-cors-headers
-
-RUN pip install setuptools
 
 # Install additional libraries
 RUN pip install Pillow xmljson xmltodict dj_database_url psycopg2-binary uwsgi whitenoise
