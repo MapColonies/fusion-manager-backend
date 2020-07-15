@@ -3,7 +3,7 @@ from unittest.mock import patch
 from django.test import TestCase
 from imagery.models import Resource, Project
 from utils.constants.extensions import get_project_extension, get_resource_extension
-from utils.path_utils import get_file_name_from_path, get_path_suffix, cd_path_n_times
+from utils.path import get_file_name_from_path, get_path_suffix, cd_path_n_times, combine_to_path
 
 FUSION_PATH = '/'.join([os.path.dirname(os.path.abspath(__file__)), 'test_files', 'fusion/'])
 with patch.dict('os.environ', { 'FUSION_PATH': FUSION_PATH }):
@@ -98,3 +98,9 @@ class TestSearch(TestCase):
 
     #     directory = get_directory_in_directory_tree(self.resources_path, 'BlueMarble', resource_extension)
     #     self.assertEqual(directory, self.BlueMarble_resource)
+
+    def test_os_path_join(self):
+        first = "/test/"
+        second = "path/"
+        third ="/combine"
+        self.assertEqual('/test/path/combine', combine_to_path(first, second, third))

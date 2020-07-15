@@ -12,7 +12,7 @@ from utils.extract.extract_resource import get_resource, get_resource_versions, 
 from utils.search import get_all_in_directory
 from config.gee_paths import get_imagery_projects_path, get_imagery_resources_path
 from utils.constants.extensions import get_project_extension
-from utils.path import change_root_dir
+from utils.path import change_root_dir, combine_to_path
 from utils.constants.extensions import get_resource_extension, get_project_extension
 from utils.constants.query_info import get_query_info
 from utils.request import get_request_parameters
@@ -51,8 +51,10 @@ def resource(request):
     resource_name, resource_path, resource_version = query_parametes
     
     # Build full path
-    if resource_path != '' and not resource_path.endswith('/'): resource_path += '/'
-    resource_path = f'{IMAGERY_RESOURCE_PATH}{resource_path}{resource_name}{get_resource_extension()}'
+    # if resource_path != '' and not resource_path.endswith('/'): resource_path += '/'
+    # resource_path = f'{IMAGERY_RESOURCE_PATH}{resource_path}{resource_name}{get_resource_extension()}'
+    filename = f'{resource_name}{get_resource_extension()}'
+    resource_path = combine_to_path(IMAGERY_RESOURCE_PATH, resource_path, filename)
 
     if resource_version == 'latest':
         resource, _, error_message = get_resource(resource_path, name=resource_name)
@@ -71,15 +73,6 @@ def resource(request):
 @api_view(['GET'])
 def resource_image(request):
 
-    # resource_name = request.GET.get('name', '')
-    # resource_path = request.GET.get('path', '')
-    # resource_version = request.GET.get('version', '')
-
-    # if resource_name == '':
-    #     return Response("Resource name wasn't provided", status=status.HTTP_400_BAD_REQUEST)
-    # if resource_version == '':
-    #     return Response("Resource version wasn't provided", status=status.HTTP_400_BAD_REQUEST)
-
     # Get query info
     query_info = get_query_info(['name', 'path', 'version'], [True, False, True], Resource)
 
@@ -89,8 +82,10 @@ def resource_image(request):
     resource_name, resource_path, resource_version = query_parametes
 
     # Build full path
-    if resource_path != '' and not resource_path.endswith('/'): resource_path += '/'
-    resource_path = f'{IMAGERY_RESOURCE_PATH}{resource_path}{resource_name}{get_resource_extension()}'
+    # if resource_path != '' and not resource_path.endswith('/'): resource_path += '/'
+    # resource_path = f'{IMAGERY_RESOURCE_PATH}{resource_path}{resource_name}{get_resource_extension()}'
+    filename = f'{resource_name}{get_resource_extension()}'
+    resource_path = combine_to_path(IMAGERY_RESOURCE_PATH, resource_path, filename)
 
     # Get image path in static directory
     image_path, error_message = get_resource_image(resource_path, resource_name, resource_version)
@@ -110,12 +105,6 @@ def projects(request):
 
 @api_view(['GET'])
 def project(request):
-    # project_name = request.GET.get('name', '')
-    # project_path = request.GET.get('path', '')
-    # project_version = request.GET.get('version', 'latest')
-
-    # if project_name == '':
-    #     return Response("Project name wasn't provided", status=status.HTTP_400_BAD_REQUEST)
 
     # Get query info
     query_info = get_query_info(['name', 'path', 'version'], [True, False, False], Resource)
@@ -126,8 +115,10 @@ def project(request):
     project_name, project_path, project_version = query_parametes
 
     # Build full path
-    if project_path != '' and not project_path.endswith('/'): project_path += '/'
-    project_path = f'{IMAGERY_PROJECT_PATH}{project_path}{project_name}{get_project_extension()}'
+    # if project_path != '' and not project_path.endswith('/'): project_path += '/'
+    # project_path = f'{IMAGERY_PROJECT_PATH}{project_path}{project_name}{get_project_extension()}'
+    filename = f'{project_name}{get_project_extension()}'
+    project_path = combine_to_path(IMAGERY_PROJECT_PATH, project_path, filename)
     
     if project_version == 'latest':
         project, error_message = get_project(project_path, project_name)

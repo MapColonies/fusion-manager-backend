@@ -23,3 +23,9 @@ def change_root_dir(path, parent_dir_name):
 
 def exists_in_staticfiles(path):
     return os.path.isfile(STATIC_ROOT + '/' + path)
+
+
+def combine_to_path(*strings):
+    fixed_paths = ['/']
+    fixed_paths.extend([ string.strip('/') for string in strings ])
+    return os.path.join(*fixed_paths)
