@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<RasterProductAssetVersion>
+
+  <name>Resources/Imagery/BlueMarble.kiasset?version=1</name>
+
+  <type>Imagery</type>
+
+  <subtype>Product</subtype>
+
+  <version>1</version>
+
+  <state>Canceled</state>
+
+  <progress>0</progress>
+
+  <locked>0</locked>
+
+  <inputs>
+    <input>Resources/Imagery/BlueMarble.kiasset/source.kisource?version=1</input>
+  </inputs>
+
+  <children>
+    <children_element>Resources/Imagery/BlueMarble.kiasset/CombinedRP.kia?version=1</children_element>
+  </children>
+
+  <parents/>
+
+  <listeners/>
+
+  <outfiles/>
+
+  <meta>
+    <item key="createdtime">2020-06-17 19:56:13</item>
+    <item key="maxlevel">14</item>
+    <item key="minlevel">8</item>
+    <item key="preview">Resources/Imagery/BlueMarble.kiasset/product.kia/ver001/preview.png</item>
+    <item key="sourcedate">2020-06-17T00:00:00Z</item>
+  </meta>
+
+  <beginTime>0</beginTime>
+
+  <progressTime>0</progressTime>
+
+  <endTime>0</endTime>
+
+  <taskid>0</taskid>
+
+  <config>
+    <fill></fill>
+    <srs></srs>
+    <clampNonnegative>0</clampNonnegative>
+    <nomask>1</nomask>
+    <maskgenConfig>
+      <feather>100</feather>
+      <mode>Mask</mode>
+      <band>1</band>
+      <fillvalue>-1</fillvalue>
+      <threshold>0</threshold>
+      <holesize>0</holesize>
+      <whitefill>0</whitefill>
+      <nodata></nodata>
+    </maskgenConfig>
+    <fuid_resource>1000</fuid_resource>
+  </config>
+
+</RasterProductAssetVersion>

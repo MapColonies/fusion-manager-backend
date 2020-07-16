@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<SourceAsset>
+
+  <name>Resources/Imagery/BlueMarble.kiasset/source.kisource</name>
+
+  <type>Imagery</type>
+
+  <subtype>Source</subtype>
+
+  <inputs/>
+
+  <meta/>
+
+  <versions>
+    <version>Resources/Imagery/BlueMarble.kiasset/source.kisource?version=1</version>
+  </versions>
+
+  <config>
+    <sources>
+      <source>
+        <uri>khfile://src/Imagery/bluemarble_4km.tif</uri>
+        <size>23866534</size>
+        <mtime>1490904554</mtime>
+      </source>
+    </sources>
+  </config>
+
+</SourceAsset>

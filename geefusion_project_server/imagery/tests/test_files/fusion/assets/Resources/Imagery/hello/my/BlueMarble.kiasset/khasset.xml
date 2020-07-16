@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<RasterProductAsset>
+
+  <name>Resources/Imagery/BlueMarble.kiasset</name>
+
+  <type>Imagery</type>
+
+  <subtype>Product</subtype>
+
+  <inputs>
+    <input>Resources/Imagery/BlueMarble.kiasset/source.kisource?version=1</input>
+  </inputs>
+
+  <meta>
+    <item key="maxlevel">14</item>
+    <item key="minlevel">8</item>
+    <item key="sourcedate">2020-06-17T00:00:00Z</item>
+  </meta>
+
+  <versions>
+    <version>Resources/Imagery/BlueMarble.kiasset?version=2</version>
+  </versions>
+
+  <config>
+    <fill></fill>
+    <srs></srs>
+    <clampNonnegative>0</clampNonnegative>
+    <nomask>1</nomask>
+    <maskgenConfig>
+      <feather>100</feather>
+      <mode>Mask</mode>
+      <band>1</band>
+      <fillvalue>-1</fillvalue>
+      <threshold>0</threshold>
+      <holesize>0</holesize>
+      <whitefill>0</whitefill>
+      <nodata></nodata>
+    </maskgenConfig>
+    <fuid_resource>1000</fuid_resource>
+    <provider_id>7</provider_id>
+  </config>
+
+</RasterProductAsset>
