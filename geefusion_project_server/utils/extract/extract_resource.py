@@ -58,7 +58,7 @@ def get_resource(path, version='latest', name=None):
     extent, thumbnail, creation_date, level, resolution, mask = data
 
     # Create resource object
-    resource = Resource(name=name, version=version, path=path, extent=extent, takenAt=creation_date, level=level, resolution=resolution, mask=mask)
+    resource = Resource(name=name, version=version, path=path, extent=extent, taken_at=creation_date, level=level, resolution=resolution, mask=mask)
     
     # Save resource thumbnail
     __save_resource_thumbnail__(resource, thumbnail)

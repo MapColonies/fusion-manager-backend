@@ -10,12 +10,12 @@ from utils.mask import mask_to_json
 #                     'threshold', 'hole_size', 'white_fill', 'no_data')
 
 class ResourceSerializer(serializers.ModelSerializer):
-    takenAt = serializers.DateTimeField(format='%Y-%m-%dT%H:%M:%SZ')
+    taken_at = serializers.DateTimeField(format='%Y-%m-%dT%H:%M:%SZ')
     mask = serializers.SerializerMethodField()
     
     class Meta:
         model = Resource
-        fields = ('name', 'version', 'extent', 'takenAt', 'level', 'resolution', 'mask')
+        fields = ('name', 'version', 'extent', 'taken_at', 'level', 'resolution', 'mask')
         depth = 1
     
     def get_mask(self, obj):

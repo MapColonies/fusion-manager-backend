@@ -22,7 +22,7 @@ class Resource(models.Model):
     path = models.CharField(max_length=300)                     # Path to the resource folder
     extent = models.CharField(max_length=200)
     thumbnail = models.ImageField(upload_to='static')           # Resource preview
-    takenAt = models.DateTimeField()                            # The time the resource was taken
+    taken_at = models.DateTimeField()                           # The time the resource was taken
     level = models.PositiveIntegerField()                       # Resource resolution level
     resolution = models.CharField(max_length=25)
     mask = models.OneToOneField(Mask, on_delete=models.CASCADE)
@@ -31,6 +31,7 @@ class Resource(models.Model):
         return self.name
 
     class Meta:
+        ordering = ['taken_at']
         unique_together = (('name', 'version', 'path'),)
 
 # Project model.

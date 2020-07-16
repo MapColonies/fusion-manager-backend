@@ -22,7 +22,7 @@ class TestProject(TestCase):
             name='test_resource', 
             version=1, path='/', 
             extent='453x3242', 
-            takenAt='2020-03-03T00:00:00Z', 
+            taken_at='2020-03-03T00:00:00Z', 
             level='4', 
             resolution='5000m/px', 
             mask=mask
