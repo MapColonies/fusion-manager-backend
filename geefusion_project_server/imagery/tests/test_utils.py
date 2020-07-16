@@ -1,13 +1,18 @@
 import os
 from unittest.mock import patch
+
 from django.test import TestCase
-from imagery.models import Resource, Project
-from utils.constants.extensions import get_project_extension, get_resource_extension
-from utils.path import get_file_name_from_path, get_path_suffix, cd_path_n_times, combine_to_path
+
+from imagery.models import Project, Resource
+from utils.constants.extensions import (get_project_extension,
+                                        get_resource_extension)
+from utils.path import (cd_path_n_times, combine_to_path,
+                        get_file_name_from_path, get_path_suffix)
 
 FUSION_PATH = '/'.join([os.path.dirname(os.path.abspath(__file__)), 'test_files', 'fusion/'])
 with patch.dict('os.environ', { 'FUSION_PATH': FUSION_PATH }):
-    from utils.search import exists_with_version, get_versions, get_all_in_directory
+    from utils.search import (exists_with_version, get_versions, get_all_in_directory, 
+                            get_all_projects_by_name_in_directory_tree, get_all_resources_by_name_in_directory_tree)
 
 class TestPathUtils(TestCase):
 
@@ -47,10 +52,10 @@ class TestPathUtils(TestCase):
 class TestSearch(TestCase):
 
     def setUp(self):
-        self.projects_path = '/'.join([FUSION_PATH, 'assets', 'Projects', 'Imagery'])
-        self.resources_path = '/'.join([FUSION_PATH, 'assets', 'Resources', 'Imagery'])
-        self.SFBayArea_project = '/'.join([self.projects_path, 'SFBayArea.kiproject'])
-        self.BlueMarble_resource = '/'.join([self.resources_path, 'BlueMarble.kiasset'])
+        self.projects_path = combine_to_path(FUSION_PATH, 'assets', 'Projects', 'Imagery')
+        self.resources_path = combine_to_path(FUSION_PATH, 'assets', 'Resources', 'Imagery')
+        self.SFBayArea_project = combine_to_path(self.projects_path, 'SFBayArea.kiproject')
+        self.BlueMarble_resource = combine_to_path(self.resources_path, 'BlueMarble.kiasset')
 
     def test_exists_with_version(self):
 
@@ -104,3 +109,13 @@ class TestSearch(TestCase):
         second = "path/"
         third ="/combine"
         self.assertEqual('/test/path/combine', combine_to_path(first, second, third))
+    
+    def test_get_all_by_name_in_directory_tree(self):
+        
+        root_path = os.path.join(self.resources_path, "hello/my")
+        model_type = 'Imagery'
+        name = "BlueMarble"
+
+        resources = get_all_resources_by_name_in_directory_tree(root_path, model_type, name)
+        
+        self.assertIn('/hello/my', resources)

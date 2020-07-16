@@ -3,7 +3,7 @@ import subprocess
 from imagery.models import Resource, Project
 from utils.constants.extensions import get_project_extension, get_resource_extension
 from utils.constants.filenames import get_main_xml_name, get_version_xml_name
-from utils.path import change_root_dir
+from utils.path import change_root_dir, combine_to_path
 from .xmlconverter import XMLConverter
 
 def exists_with_version(path, version):
@@ -70,14 +70,14 @@ def get_all_in_directory(path, model, model_type):
     return __get_directory_content__(path, Project, model_type, False)
 
 
-# def get_all_projects_in_directory_tree(path, model_type):
-#     # return __get_all_in_directory_tree__(root, Project, False)
-#     return __get_directory_content__(path, Project, model_type, False)
+def get_all_projects_by_name_in_directory_tree(path, model_type, name):
+    # return __get_all_in_directory_tree__(root, Project, False)
+    return __get_all_by_name_in_directory_tree__(path, Project, model_type, False, name)
 
 
-# def get_all_resources_in_directory_tree(path, model_type):
-#     # return __get_all_in_directory_tree__(root, Resource, True)
-#     return __get_directory_content__(path, Resource, model_type, True)
+def get_all_resources_by_name_in_directory_tree(path, model_type, name):
+    # return __get_all_in_directory_tree__(root, Resource, True)
+    return __get_all_by_name_in_directory_tree__(path, Resource, model_type, True, name)
 
 
 # def get_directory_in_directory_tree(root_directory, name, extension):
@@ -169,3 +169,31 @@ def __get_directory_content__(directory, model, model_type, check_for_versions):
 #                 dirs.remove(dir)
     
 #     return wanted_directories
+
+
+def __get_all_by_name_in_directory_tree__(root_directory, model, model_type, check_for_versions, name):
+
+    extension = get_resource_extension() if model == Resource else get_project_extension()
+
+    # Find all directories with the given name that have a sub directory with a name that answers to the regex ver*
+    bash_command = ' '.join([ f"find {root_directory} -name '{name}*{extension}'", "-type d -execdir find '{}' -maxdepth 1 -name 'ver*' -printf '' \; -printf '%h\\n'" ])
+
+    # Execute bash command
+    matches = subprocess.check_output(bash_command, shell=True).splitlines()
+
+    # Remove duplicates
+    matches = list(dict.fromkeys(matches))
+
+    # Decode lines to utf-8, remove "./" from the beginning of the path and set full path
+    # return [ os.path.join(change_root_dir(line.decode('utf-8')[1:], model_type), name) for line in matches ]
+
+    results = []
+    for line in matches:
+
+        line = line.decode('utf-8')
+        line = line[1:]
+        line = change_root_dir(line, model_type)
+        line = os.path.join('/', line)
+        results.append(line)
+
+    return results

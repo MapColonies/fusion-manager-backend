@@ -4,7 +4,7 @@ with patch.dict('os.environ', { 'FUSION_PATH': '/'.join([os.path.dirname(os.path
     from django.test import TestCase, Client
     from django.urls import reverse, resolve
     # from imagery.models import Project, Resource, Mask
-    from imagery.views import projects, resources, project, resource
+    from imagery.views import projects, resources, project, resource, resource_search, project_search
 import json
 
 # Create your tests here.
@@ -85,7 +85,7 @@ class TestUrls(TestCase):
         self.assertIn('SFBayArea', json.loads(response.content)['projects'])
     
     
-    def test_project(self):
+    def test_project_exists(self):
         # Get url
         url = reverse('imagery-project')
 
@@ -108,4 +108,44 @@ class TestUrls(TestCase):
         self.assertEquals(
             json.loads(response.content)['versions'], 
             [1]
+        )
+    
+    
+    def test_search_project(self):
+        # Get url
+        url = reverse('imagery-project-search')
+
+        # Check that url gives correct function
+        self.assertEquals(resolve(url).func, project_search)
+
+        # Make request
+        response = self.client.get(url, data={ 'name': 'SFBayArea' })
+
+        # Check response status code
+        self.assertEqual(response.status_code, 200)
+        
+        # Check paths of projects by the name SFBayArea
+        self.assertEquals(
+            json.loads(response.content)['projects'], 
+            ["/hello/my/friend","/"]
+        )
+    
+    
+    def test_search_resource(self):
+        # Get url
+        url = reverse('imagery-resource-search')
+
+        # Check that url gives correct function
+        self.assertEquals(resolve(url).func, resource_search)
+
+        # Make request
+        response = self.client.get(url, data={ 'name': 'BlueMarble' })
+
+        # Check response status code
+        self.assertEqual(response.status_code, 200)
+        
+        # Check paths of resources by the name SFBayArea
+        self.assertEquals(
+            json.loads(response.content)['resources'], 
+            ['/hello/my/friend', '/hello/my', '/hello', '/']
         )

@@ -9,7 +9,7 @@ from .serializers import ProjectSerializer, ResourceSerializer
 from datetime import datetime
 from utils.extract.extract_project import get_project, get_project_versions
 from utils.extract.extract_resource import get_resource, get_resource_versions, get_resource_image
-from utils.search import get_all_in_directory
+from utils.search import get_all_in_directory, get_all_projects_by_name_in_directory_tree, get_all_resources_by_name_in_directory_tree
 from config.gee_paths import get_imagery_projects_path, get_imagery_resources_path
 from utils.constants.extensions import get_project_extension
 from utils.path import change_root_dir, combine_to_path
@@ -24,6 +24,7 @@ from django.template import loader
 
 IMAGERY_PROJECT_PATH = get_imagery_projects_path()
 IMAGERY_RESOURCE_PATH = get_imagery_resources_path()
+MODEL_TYPE = 'Imagery'
 
 @api_view(['GET'])
 def home(request):
@@ -33,10 +34,32 @@ def home(request):
 def about(request):
     return HttpResponse('<h1>About</h1>')
 
+def search(request, model):
+
+    # Get query info
+    query_info = get_query_info(['name'], [True], model)
+
+    # Extract query parameters
+    query_parametes, error_message = get_request_parameters(request, query_info)
+    if error_message != '': return Response(error_message, status=status.HTTP_400_BAD_REQUEST)
+    name = query_parametes[0]
+
+    # Get results matching given name
+    if model == Resource:
+        path = get_imagery_resources_path()
+        matching_resources = get_all_resources_by_name_in_directory_tree(path, MODEL_TYPE, name)
+        json_name = 'resources'
+    else:
+        path = get_imagery_projects_path()
+        matching_resources = get_all_projects_by_name_in_directory_tree(path, MODEL_TYPE, name)
+        json_name = 'projects'
+
+    return Response({f'{json_name}': matching_resources})
+
 @api_view(['GET'])
 def resources(request):
     path = IMAGERY_RESOURCE_PATH + request.GET.get('path', '')
-    results = get_all_in_directory(path, Resource, 'Imagery')
+    results = get_all_in_directory(path, Resource, MODEL_TYPE)
     return Response(results)
 
 @api_view(['GET'])
@@ -98,9 +121,13 @@ def resource_image(request):
         return HttpResponse(image.read(), content_type='image/jpeg')
 
 @api_view(['GET'])
+def resource_search(request):
+    return search(request, Resource)
+
+@api_view(['GET'])
 def projects(request):
     path = IMAGERY_PROJECT_PATH + request.GET.get('path', '')
-    results = get_all_in_directory(path, Project, 'Imagery')
+    results = get_all_in_directory(path, Project, MODEL_TYPE)
     return Response(results)
 
 @api_view(['GET'])
@@ -134,3 +161,7 @@ def project(request):
 
     if project.version == 0: project.delete()
     return Response(data) if not versions else Response({'versions': versions, 'latest': data})
+
+@api_view(['GET'])
+def project_search(request):
+    return search(request, Project)
