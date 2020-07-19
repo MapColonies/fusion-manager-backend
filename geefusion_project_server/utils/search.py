@@ -176,7 +176,7 @@ def __get_all_by_name_in_directory_tree__(root_directory, model, model_type, che
     extension = get_resource_extension() if model == Resource else get_project_extension()
 
     # Find all directories with the given name that have a sub directory with a name that answers to the regex ver*
-    bash_command = ' '.join([ f"find {root_directory} -name '{name}*{extension}'", "-type d -execdir find '{}' -maxdepth 1 -name 'ver*' -printf '' \; -printf '%h\\n'" ])
+    bash_command = ' '.join([ f"find {root_directory} -name '*{name}*{extension}'", "-type d -execdir find '{}' -maxdepth 1 -name 'ver*' -printf '' \; -printf '%p\\n'" ]) # %p - full path, %h - full path to containing directory
 
     # Execute bash command
     matches = subprocess.check_output(bash_command, shell=True).splitlines()
@@ -191,7 +191,7 @@ def __get_all_by_name_in_directory_tree__(root_directory, model, model_type, che
     for line in matches:
 
         line = line.decode('utf-8')
-        line = line[1:]
+        line = line[1:-len(extension)]
         line = change_root_dir(line, model_type)
         line = os.path.join('/', line)
         results.append(line)
