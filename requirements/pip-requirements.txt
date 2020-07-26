@@ -1,0 +1,12 @@
+setuptools
+django
+djangorestframework
+django-rest-swagger
+django-cors-headers
+Pillow
+xmljson
+xmltodict
+dj_database_url
+psycopg2-binary
+uwsgi
+whitenoise

@@ -1,0 +1,9 @@
+software-properties-common
+python3.7
+python3-pip
+python-psycopg2
+build-essential
+python3.7-dev
+g++
+libpcre3
+libpcre3-dev
