@@ -1,3 +1,4 @@
+import os
 from django.test import TestCase
 from imagery.models import Project, Resource, Mask
 
@@ -20,7 +21,7 @@ class TestProject(TestCase):
 
         resource = Resource.objects.create(
             name='test_resource', 
-            version=1, path='/', 
+            version=1, path=os.sep, 
             extent='453x3242', 
             taken_at='2020-03-03T00:00:00Z', 
             level='4', 
@@ -28,7 +29,7 @@ class TestProject(TestCase):
             mask=mask
         )
 
-        cls.project = Project.objects.create(name='test_project', version=1, path='/')
+        cls.project = Project.objects.create(name='test_project', version=1, path=os.sep)
 
         cls.project.resources.add(resource)
 

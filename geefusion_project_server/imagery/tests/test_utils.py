@@ -9,41 +9,39 @@ from utils.constants.extensions import (get_project_extension,
 from utils.path import (cd_path_n_times, combine_to_path,
                         get_file_name_from_path, get_path_suffix)
 
-FUSION_PATH = '/'.join([os.path.dirname(os.path.abspath(__file__)), 'test_files', 'fusion/'])
+FUSION_PATH = os.sep.join([os.path.dirname(os.path.abspath(__file__)), 'test_files', f'fusion{os.sep}'])
 with patch.dict('os.environ', { 'FUSION_PATH': FUSION_PATH }):
     from utils.search import (exists_with_version, get_versions, get_all_in_directory, 
                             get_all_projects_by_name_in_directory_tree, get_all_resources_by_name_in_directory_tree)
 
 class TestPathUtils(TestCase):
+    
+    def setUp(self):
+        self.test_path = os.sep.join(['level1', 'level2', 'level3', 'level4.txt'])
+
 
     def test_get_path_suffix(self):
-
-        path = 'level1/level2/level3/level4.txt'
-        suffix = get_path_suffix(path)
-
+        suffix = get_path_suffix(self.test_path)
         self.assertEquals(suffix, 'level4.txt')
     
 
     def test_get_file_name_from_path(self):
-
-        path = 'level1/level2/level3/level4.txt'
-        file_name = get_file_name_from_path(path)
-
+        file_name = get_file_name_from_path(self.test_path)
         self.assertEquals(file_name, 'level4')
     
 
     def test_cd_path_n_times(self):
 
-        path = 'level1/level2/level3/level4.txt'
+        path = self.test_path
 
         result = cd_path_n_times(path)
-        self.assertEquals(result, 'level1/level2/level3')
+        self.assertEquals(result, os.sep.join(['level1', 'level2', 'level3']))
 
         result = cd_path_n_times(path, 1)
-        self.assertEquals(result, 'level1/level2/level3')
+        self.assertEquals(result, os.sep.join(['level1', 'level2', 'level3']))
 
         result = cd_path_n_times(path, 2)
-        self.assertEquals(result, 'level1/level2')
+        self.assertEquals(result, os.sep.join(['level1', 'level2']))
 
         result = cd_path_n_times(path, 3)
         self.assertEquals(result, 'level1')
@@ -86,36 +84,18 @@ class TestSearch(TestCase):
     def get_all_resources_in_directory(self):
         resources = get_all_in_directory(self.projects_path, Resource, 'Imagery')
         self.assertCountEqual(resources['resources'], ['BlueMarble', 'i3_15Meter_20041010', 'SFBayAreaLanSat_20021010', 'SFHighResInset_20061010'])
-    
-    # def test_get_directory_in_directory_tree(self):
-
-    #     project_extension = get_project_extension()
-    #     resource_extension = get_resource_extension()
-
-    #     directory = get_directory_in_directory_tree(self.projects_path, 'random', project_extension)
-    #     self.assertEqual(directory, None)
-
-    #     directory = get_directory_in_directory_tree(self.projects_path, 'SFBayArea', project_extension)
-    #     self.assertEqual(directory, self.SFBayArea_project)
-
-    #     directory = get_directory_in_directory_tree(self.resources_path, 'random', resource_extension)
-    #     self.assertEqual(directory, None)
-
-    #     directory = get_directory_in_directory_tree(self.resources_path, 'BlueMarble', resource_extension)
-    #     self.assertEqual(directory, self.BlueMarble_resource)
 
     def test_os_path_join(self):
-        first = "/test/"
-        second = "path/"
-        third ="/combine"
-        self.assertEqual('/test/path/combine', combine_to_path(first, second, third))
+        first = f'{os.sep}test{os.sep}'
+        second = f'path{os.sep}'
+        third = f'{os.sep}combine'
+        self.assertEqual(os.path.join(os.sep, 'test', 'path', 'combine'), combine_to_path(first, second, third))
     
     def test_get_all_by_name_in_directory_tree(self):
         
-        root_path = os.path.join(self.resources_path, "hello/my")
+        root_path = os.path.join(self.resources_path, 'hello', 'my')
         model_type = 'Imagery'
-        name = "BlueMarble"
+        name = 'BlueMarble'
 
         resources = get_all_resources_by_name_in_directory_tree(root_path, model_type, name)
-        
-        self.assertIn('/hello/my', resources)
+        self.assertIn(os.path.join(os.sep, 'hello', 'my', name), resources)

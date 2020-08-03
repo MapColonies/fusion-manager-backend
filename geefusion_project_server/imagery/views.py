@@ -21,6 +21,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.template import loader
+import constant.object_names as object_names
 
 IMAGERY_PROJECT_PATH = get_imagery_projects_path()
 IMAGERY_RESOURCE_PATH = get_imagery_resources_path()
@@ -74,8 +75,6 @@ def resource(request):
     resource_name, resource_path, resource_version = query_parametes
     
     # Build full path
-    # if resource_path != '' and not resource_path.endswith('/'): resource_path += '/'
-    # resource_path = f'{IMAGERY_RESOURCE_PATH}{resource_path}{resource_name}{get_resource_extension()}'
     filename = f'{resource_name}{get_resource_extension()}'
     resource_path = combine_to_path(IMAGERY_RESOURCE_PATH, resource_path, filename)
 
@@ -105,8 +104,6 @@ def resource_image(request):
     resource_name, resource_path, resource_version = query_parametes
 
     # Build full path
-    # if resource_path != '' and not resource_path.endswith('/'): resource_path += '/'
-    # resource_path = f'{IMAGERY_RESOURCE_PATH}{resource_path}{resource_name}{get_resource_extension()}'
     filename = f'{resource_name}{get_resource_extension()}'
     resource_path = combine_to_path(IMAGERY_RESOURCE_PATH, resource_path, filename)
 
@@ -116,7 +113,7 @@ def resource_image(request):
         return Response(error_message, status=status.HTTP_404_NOT_FOUND)
     
     # Get image absolute path
-    image_path = BASE_DIR + '/' + str(image_path)
+    image_path = os.path.join(BASE_DIR, str(image_path))
     with open(image_path, 'rb') as image:
         return HttpResponse(image.read(), content_type='image/jpeg')
 
@@ -142,8 +139,6 @@ def project(request):
     project_name, project_path, project_version = query_parametes
 
     # Build full path
-    # if project_path != '' and not project_path.endswith('/'): project_path += '/'
-    # project_path = f'{IMAGERY_PROJECT_PATH}{project_path}{project_name}{get_project_extension()}'
     filename = f'{project_name}{get_project_extension()}'
     project_path = combine_to_path(IMAGERY_PROJECT_PATH, project_path, filename)
     

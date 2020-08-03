@@ -1,6 +1,8 @@
 import os
 from unittest.mock import patch
-with patch.dict('os.environ', { 'FUSION_PATH': '/'.join([os.path.dirname(os.path.abspath(__file__)), 'test_files', 'fusion/']) }):
+
+FUSION_PATH = os.sep.join([os.path.dirname(os.path.abspath(__file__)), 'test_files', f'fusion{os.sep}'])
+with patch.dict('os.environ', { 'FUSION_PATH': FUSION_PATH }):
     from django.test import TestCase, Client
     from django.urls import reverse, resolve
     # from imagery.models import Project, Resource, Mask
@@ -117,9 +119,11 @@ class TestUrls(TestCase):
 
         # Check that url gives correct function
         self.assertEquals(resolve(url).func, project_search)
+        
+        name = 'SFBayArea'
 
         # Make request
-        response = self.client.get(url, data={ 'name': 'SFBayArea' })
+        response = self.client.get(url, data={ 'name': name })
 
         # Check response status code
         self.assertEqual(response.status_code, 200)
@@ -127,7 +131,7 @@ class TestUrls(TestCase):
         # Check paths of projects by the name SFBayArea
         self.assertEquals(
             json.loads(response.content)['projects'], 
-            ["/hello/my/friend","/"]
+            [os.path.join(os.sep, 'hello', 'my', 'friend', name), os.path.join(os.sep, name)]
         )
     
     
@@ -137,9 +141,11 @@ class TestUrls(TestCase):
 
         # Check that url gives correct function
         self.assertEquals(resolve(url).func, resource_search)
+        
+        name = 'BlueMarble'
 
         # Make request
-        response = self.client.get(url, data={ 'name': 'BlueMarble' })
+        response = self.client.get(url, data={ 'name': name })
 
         # Check response status code
         self.assertEqual(response.status_code, 200)
@@ -147,5 +153,8 @@ class TestUrls(TestCase):
         # Check paths of resources by the name SFBayArea
         self.assertEquals(
             json.loads(response.content)['resources'], 
-            ['/hello/my/friend', '/hello/my', '/hello', '/']
+            [os.path.join(os.sep, 'hello', 'my', 'friend', name),
+             os.path.join(os.sep, 'hello', 'my', name),
+             os.path.join(os.sep, 'hello', name),
+             os.path.join(os.sep, name)]
         )
