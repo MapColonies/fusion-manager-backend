@@ -216,4 +216,4 @@ def __relatively_get_preview_path__(original_preview_path, xml_path):
 def __get_resolution_by_level__(resource_level):
     # Calculate resource resolution
     LEVEL_0_RESOLUTION = 156412
-    return LEVEL_0_RESOLUTION / 2 ** resource_level
+    return LEVEL_0_RESOLUTION / float(2 ** resource_level)
