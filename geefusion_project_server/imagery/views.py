@@ -27,14 +27,6 @@ IMAGERY_PROJECT_PATH = get_imagery_projects_path()
 IMAGERY_RESOURCE_PATH = get_imagery_resources_path()
 MODEL_TYPE = 'Imagery'
 
-@api_view(['GET'])
-def home(request):
-    return HttpResponse('<h1>Projects home view</h1>')
-
-@api_view(['GET'])
-def about(request):
-    return HttpResponse('<h1>About</h1>')
-
 def search(request, model):
 
     # Get query info
