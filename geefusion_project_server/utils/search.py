@@ -18,7 +18,7 @@ def exists_with_version(path, version):
 
     # Check if wanted version exists
     if version not in versions:
-        return [False, "No such version"]
+        return [False, f"No such version ({version})"]
 
     return [True, ""]
 
