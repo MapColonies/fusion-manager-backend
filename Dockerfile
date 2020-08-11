@@ -13,35 +13,38 @@ RUN add-apt-repository ppa:deadsnakes/ppa
 
 # Install dependencies
 RUN apt-get update &&\
-	apt-get -y install --no-install-recommends sudo\
-        python3.7\
-        python3-pip\
+        apt-get -y install --no-install-recommends python3.7\
         python-psycopg2\
         build-essential\
         python3.7-dev\
-        g++\
-        libpcre3\
         libpcre3-dev\
-        nano
+        python3-pip\
+        libpcre3\
+        g++
 
 # Upgrade pip
 RUN python3.7 -m pip install --upgrade --force pip
 
 RUN pip install setuptools
 
-# Install django
-RUN pip install django djangorestframework django-rest-swagger django-cors-headers
-
-# Install additional libraries
-RUN pip install Pillow xmljson xmltodict dj_database_url psycopg2-binary uwsgi whitenoise
-
-#RUN adduser --disabled-password myuser
-#USER myuser
+# Install django and additional libraries
+RUN pip install django\
+        djangorestframework\
+        django-rest-swagger\
+        django-cors-headers\
+        dj_database_url\
+        psycopg2-binary\
+        whitenoise\
+        xmltodict\
+        xmljson\
+        Pillow\
+        uwsgi
 
 # Copy source files
 COPY geefusion_project_server /opt/myapp/geefusion_project_server
 
-FROM alpine
+FROM alpine:3.12
+
 COPY --from=base / /
 
 # Copy entrypoint script
@@ -53,5 +56,3 @@ EXPOSE 8000
 
 # Set entrypoint
 ENTRYPOINT ["bash", "/entrypoint.sh"]
-#ENTRYPOINT ["python3.7", "manage.py", "runserver", "0.0.0.0:8000"]
-#ENTRYPOINT ["uwsgi", "--ini", "geefusion_project_server/wsgi-docker.ini"]

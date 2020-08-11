@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Default values of arguments
 ENTERYPOINT=0
 
