@@ -138,20 +138,14 @@ def __get_metadata__(xml_path, json):
 def __get_config_data__(json):
 
     config = json['config']
-
     no_mask = int(config['nomask']) if 'nomask' in config else 0
-    # If no mask is defined
-    if no_mask == 1:
-        mask = Mask(no_mask=bool(no_mask), feather=100, mode='Mask', band=1, fill_value=-1,
-                    threshold=0, hole_size=0, white_fill=0, no_data=None)
-        mask.save()
-        return [mask]
-    
+    have_mask = int(config['havemask']) if 'havemask' in config else 0
     mask_gen_config = config['maskgenConfig']
 
     # Get mask gen data
     mask = Mask(
-        no_mask=no_mask,
+        no_mask=bool(no_mask),
+        have_mask=bool(have_mask),
         feather=mask_gen_config['feather'],
         mode=mask_gen_config['mode'],
         band=mask_gen_config['band'],
