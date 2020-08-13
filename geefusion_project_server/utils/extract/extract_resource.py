@@ -70,9 +70,11 @@ def get_resource(path, version='latest', name=None):
 
 def __save_resource_thumbnail__(resource, thumbnail):
     thumbnail_original_path = thumbnail[0]
+    thumbnail_name = get_path_suffix(thumbnail_original_path)
     thumbnail_resource_version = get_path_suffix(cd_path_n_times(thumbnail_original_path))
     thumbnail_data = thumbnail[1]
-    thumbnail_path = f'Resources/Imagery/{resource.name}/{thumbnail_resource_version}/preview.png'
+    resource_relative_path = change_root_dir(resource.path, 'assets')[:-len(get_resource_extension())][1:]
+    thumbnail_path = f'{resource_relative_path}/{thumbnail_resource_version}/{thumbnail_name}'
 
     # Check if thumbnail already exists
     if not exists_in_staticfiles(thumbnail_path):
@@ -81,15 +83,6 @@ def __save_resource_thumbnail__(resource, thumbnail):
     else:
         # Reference existing thumbnail
         resource.thumbnail.name = 'static/' + thumbnail_path
-
-
-# def get_resource_by_name(name, version='latest'):
-    # path = get_path(Resource, name)
-
-    # if path == None:
-    #     return [None, None, 'No such resource']
-    
-    # return get_resource(path, version, name=name)
 
 
 def get_resource_image(path, name, version):
@@ -101,14 +94,6 @@ def get_resource_image(path, name, version):
         return [image, '']
     
     return [None, 'Image not found']
-
-
-# def __get_latest_version__(path):
-#     versions = get_versions(path)
-#     # If the resource has no versions
-#     if len(versions) == 0:
-#         return 0
-#     return max(versions)
 
 
 def __get_data__(xml_path):
@@ -153,20 +138,14 @@ def __get_metadata__(xml_path, json):
 def __get_config_data__(json):
 
     config = json['config']
-
     no_mask = int(config['nomask']) if 'nomask' in config else 0
-    # If no mask is defined
-    if no_mask == 1:
-        mask = Mask(no_mask=bool(no_mask), feather=100, mode='Mask', band=1, fill_value=-1,
-                    threshold=0, hole_size=0, white_fill=0, no_data=None)
-        mask.save()
-        return [mask]
-    
+    have_mask = int(config['havemask']) if 'havemask' in config else 0
     mask_gen_config = config['maskgenConfig']
 
     # Get mask gen data
     mask = Mask(
-        no_mask=no_mask,
+        no_mask=bool(no_mask),
+        have_mask=bool(have_mask),
         feather=mask_gen_config['feather'],
         mode=mask_gen_config['mode'],
         band=mask_gen_config['band'],

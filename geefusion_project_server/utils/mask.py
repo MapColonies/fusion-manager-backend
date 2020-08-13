@@ -2,6 +2,9 @@ def mask_to_json(mask):
 
     if mask.no_mask:
         return { 'no_mask': True }
+    
+    if mask.have_mask:
+        return { 'have_mask': True }
 
     return {
         'feather': mask.feather,

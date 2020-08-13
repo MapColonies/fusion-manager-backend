@@ -5,6 +5,7 @@ from django.db import models
 # Represents a resource mask values.
 class Mask(models.Model):
     no_mask = models.BooleanField()                     # Does a mask exist
+    have_mask = models.BooleanField()                     # Already has a mask file
     feather = models.PositiveIntegerField(blank=True)
     mode = models.CharField(max_length=20, blank=True)
     band = models.PositiveIntegerField(blank=True)
