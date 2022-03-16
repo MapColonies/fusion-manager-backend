@@ -43,7 +43,7 @@ RUN pip install django\
 # Copy source files
 COPY geefusion_project_server /opt/myapp/geefusion_project_server
 
-FROM alpine:3.12
+FROM alpine:3.13.7
 
 COPY --from=base / /
 
